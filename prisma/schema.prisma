@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model apm {
+  id                 Int    @id @default(autoincrement())
+  is_paid            Int
+  status             Int    @default(1)
+  FK_student_ra      String @db.VarChar(12)
+  FK_functionary_cpf String @db.VarChar(12)
+
+  student     student     @relation(fields: [FK_student_ra], references: [ra], onDelete: Cascade, map: "FKStudentRaApm")
+  functionary functionary @relation(fields: [FK_functionary_cpf], references: [cpf], onDelete: Cascade, map: "FKFunctionaryCpfApm")
+
+  @@index([FK_student_ra], map: "FKStudentRaApm")
+  @@index([FK_functionary_cpf], map: "FKFunctionaryCpfApm")
+}
+
+model functionary {
+  cpf                 String  @id @db.VarChar(10)
+  first_name          String  @db.VarChar(20)
+  last_name           String  @db.VarChar(20)
+  email               String  @db.VarChar(50)
+  password            String
+  status              Int     @default(1) @db.TinyInt
+  profile_picture_url String?
+  apm                 apm[]
+}
+
+model locker {
+  number        Int      @id
+  isRented      Int      @db.TinyInt
+  rentedAt      DateTime
+  FK_section_id Int
+  status        Int      @default(1) @db.TinyInt
+
+  section section   @relation(fields: [FK_section_id], references: [id], onDelete: Cascade, map: "FKSectionIdLocker")
+  student student[]
+
+  @@index([FK_section_id], map: "FKSectionIdLocker")
+}
+
+model section {
+  id         Int      @id @default(autoincrement())
+  color      String   @db.VarChar(10)
+  left_room  String   @db.VarChar(20)
+  right_room String   @db.VarChar(20)
+  status     Int      @default(1) @db.TinyInt
+  locker     locker[]
+}
+
+model student {
+  ra                  String  @id @db.VarChar(12)
+  first_name          String  @db.VarChar(20)
+  last_name           String  @db.VarChar(20)
+  email               String  @db.VarChar(50)
+  password            String?
+  code                String? @db.VarChar(6)
+  locker_number       Int?
+  status              Int     @default(1) @db.TinyInt
+  profile_picture_url String? @db.VarChar(255)
+
+  locker locker? @relation(fields: [locker_number], references: [number], onDelete: Cascade, map: "FKLockerNumberStudent")
+  apm    apm[]
+
+  @@index([locker_number], map: "FKLockerNumberStudent")
+}
