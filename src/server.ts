@@ -1,9 +1,14 @@
 import express from 'express'
+import 'express-async-errors'
+import { handleErrorsMiddleware } from './middlewares/handle-errors-middleware'
+
+import { router } from './routes'
 
 const app = express()
 
-app.get('/', (request, response) => {
-  return response.json({ message: 'Hello World' })
-})
+app.use(express.json())
+app.use(router)
+
+app.use(handleErrorsMiddleware)
 
 app.listen(3333)
