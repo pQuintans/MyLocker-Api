@@ -10,7 +10,7 @@ datasource db {
 
 model apm {
   id                 Int    @id @default(autoincrement())
-  is_paid            Int
+  isPaid             Int
   status             Int    @default(1)
   FK_student_ra      String @db.VarChar(12)
   FK_functionary_cpf String @db.VarChar(12)

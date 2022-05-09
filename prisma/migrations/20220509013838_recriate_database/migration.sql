@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE `apm` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `is_paid` INTEGER NOT NULL,
+    `isPaid` INTEGER NOT NULL,
     `status` INTEGER NOT NULL DEFAULT 1,
     `FK_student_ra` VARCHAR(12) NOT NULL,
     `FK_functionary_cpf` VARCHAR(12) NOT NULL,
