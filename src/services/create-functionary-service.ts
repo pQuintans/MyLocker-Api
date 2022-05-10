@@ -1,4 +1,4 @@
-import { FunctionariesRepositories } from '../repositories/functionaries-repository'
+import { FunctionariesRepositories } from '@repositories/functionaries-repository'
 import { hash } from 'bcryptjs'
 
 interface CreateFunctionaryServiceRequest {
