@@ -13,6 +13,6 @@ export interface FunctionaryFindUniqueData {
 }
 
 export interface FunctionariesRepositories {
-  create: (data: FunctionaryCreateData) => Promise<FunctionaryCreateData>
+  create: (data: FunctionaryCreateData) => Promise<void>
   findUnique: (data: FunctionaryFindUniqueData) => Promise<Functionary>
 }

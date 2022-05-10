@@ -8,7 +8,7 @@ export function handleErrorsMiddleware(
 ) {
   if (err instanceof Error) {
     return response.status(400).json({
-      error: err.message,
+      erro: err.message,
     })
   }
 

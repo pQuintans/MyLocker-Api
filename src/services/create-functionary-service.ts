@@ -28,14 +28,12 @@ export class CreateFunctionaryService {
 
     const passwordHash = await hash(password, 8)
 
-    const functionary = await this.functionariesRepository.create({
+    await this.functionariesRepository.create({
       cpf,
       first_name,
       last_name,
       email,
       password: passwordHash,
     })
-
-    return functionary
   }
 }

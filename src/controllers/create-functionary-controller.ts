@@ -11,7 +11,7 @@ export class CreateFunctionaryController {
       prismaFunctionariesRepository
     )
 
-    const functionary = await createFunctionaryService.execute({
+    await createFunctionaryService.execute({
       cpf,
       first_name,
       last_name,
@@ -19,6 +19,6 @@ export class CreateFunctionaryController {
       password,
     })
 
-    return res.status(201).json(functionary)
+    return res.status(201).send()
   }
 }

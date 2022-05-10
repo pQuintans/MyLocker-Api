@@ -15,7 +15,7 @@ export class PrismaFunctionariesRepository
     last_name,
     password,
   }: FunctionaryCreateData) {
-    const functionary = await prisma.functionary.create({
+    await prisma.functionary.create({
       data: {
         cpf,
         email,
@@ -25,8 +25,6 @@ export class PrismaFunctionariesRepository
         status: 1,
       },
     })
-
-    return functionary
   }
 
   async findUnique({ cpf }: FunctionaryFindUniqueData) {
