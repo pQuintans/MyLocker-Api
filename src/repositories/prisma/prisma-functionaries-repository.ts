@@ -4,7 +4,7 @@ import {
   FunctionaryFindUniqueByCpfData,
   FunctionaryFindUniqueByEmailData,
 } from '@repositories/functionaries-repository'
-import { prisma } from 'src/prisma'
+import { prisma } from '../../prisma'
 
 export class PrismaFunctionariesRepository
   implements FunctionariesRepositories

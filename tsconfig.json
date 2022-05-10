@@ -23,6 +23,7 @@
       "@controllers/*": ["./src/controllers/*"],
       "@entities/*": ["./src/entities/*"],
       "@services/*": ["./src/services/*"],
+      "@models/*": ["./src/models/*"],
       "@repositories/*": ["./src/repositories/*"]
     }
   },

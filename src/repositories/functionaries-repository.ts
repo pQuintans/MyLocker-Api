@@ -1,4 +1,4 @@
-import { Functionary } from 'src/model/functionary-model'
+import { Functionary } from '@models/functionary-model'
 
 export interface FunctionaryCreateData {
   cpf: string
