@@ -20,10 +20,17 @@ export class CreateFunctionaryService {
     }
 
     const functionaryAlreadyExists =
-      await this.functionariesRepository.findUnique({ cpf })
+      await this.functionariesRepository.findUniqueByCpf({ cpf })
 
     if (functionaryAlreadyExists) {
       throw new Error('Um funcionário com este CPF já foi cadastrado')
+    }
+
+    const emailAlreadyInUse =
+      await this.functionariesRepository.findUniqueByEmail({ email })
+
+    if (emailAlreadyInUse) {
+      throw new Error('Um funcionário com este E-Mail já foi cadastrado')
     }
 
     const passwordHash = await hash(password, 8)

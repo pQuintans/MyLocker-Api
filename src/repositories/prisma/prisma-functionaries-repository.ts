@@ -1,7 +1,8 @@
 import {
   FunctionariesRepositories,
   FunctionaryCreateData,
-  FunctionaryFindUniqueData,
+  FunctionaryFindUniqueByCpfData,
+  FunctionaryFindUniqueByEmailData,
 } from '@repositories/functionaries-repository'
 import { prisma } from 'src/prisma'
 
@@ -27,10 +28,20 @@ export class PrismaFunctionariesRepository
     })
   }
 
-  async findUnique({ cpf }: FunctionaryFindUniqueData) {
+  async findUniqueByCpf({ cpf }: FunctionaryFindUniqueByCpfData) {
     const functionary = await prisma.functionary.findUnique({
       where: {
         cpf: cpf,
+      },
+    })
+
+    return functionary
+  }
+
+  async findUniqueByEmail({ email }: FunctionaryFindUniqueByEmailData) {
+    const functionary = await prisma.functionary.findUnique({
+      where: {
+        email: email,
       },
     })
 

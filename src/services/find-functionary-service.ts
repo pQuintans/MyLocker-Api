@@ -14,7 +14,9 @@ export class FindFunctionaryService {
       throw new Error('Faltam informações')
     }
 
-    const functionary = await this.functionariesRepository.findUnique({ cpf })
+    const functionary = await this.functionariesRepository.findUniqueByCpf({
+      cpf,
+    })
 
     if (!functionary) {
       throw new Error('Nenhum funcionário com este CPF encontrado')

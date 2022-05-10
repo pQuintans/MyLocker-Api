@@ -26,7 +26,7 @@ model functionary {
   cpf                 String  @id @db.VarChar(10)
   first_name          String  @db.VarChar(20)
   last_name           String  @db.VarChar(20)
-  email               String  @db.VarChar(50)
+  email               String  @unique @db.VarChar(50)
   password            String
   status              Int     @default(1) @db.TinyInt
   profile_picture_url String?
@@ -59,7 +59,7 @@ model student {
   ra                  String  @id @db.VarChar(12)
   first_name          String  @db.VarChar(20)
   last_name           String  @db.VarChar(20)
-  email               String  @db.VarChar(50)
+  email               String  @unique @db.VarChar(50)
   password            String?
   code                String? @db.VarChar(6)
   locker_number       Int?

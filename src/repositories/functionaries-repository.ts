@@ -8,11 +8,22 @@ export interface FunctionaryCreateData {
   password: string
 }
 
-export interface FunctionaryFindUniqueData {
+export interface FunctionaryFindUniqueByCpfData {
   cpf: string
+}
+
+export interface FunctionaryFindUniqueByEmailData {
+  email: string
 }
 
 export interface FunctionariesRepositories {
   create: (data: FunctionaryCreateData) => Promise<void>
-  findUnique: (data: FunctionaryFindUniqueData) => Promise<Functionary>
+
+  findUniqueByCpf: (
+    data: FunctionaryFindUniqueByCpfData
+  ) => Promise<Functionary>
+
+  findUniqueByEmail: (
+    data: FunctionaryFindUniqueByEmailData
+  ) => Promise<Functionary>
 }
