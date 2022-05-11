@@ -1,5 +1,5 @@
 import { PrismaStudentsRepository } from '@repositories/prisma/prisma-students-repository'
-import { CreateStudentService } from '@services/create-student-service'
+import { CreateStudentService } from '@services/student/create-student-service'
 import { Request, Response } from 'express'
 
 export class CreateStudentController {

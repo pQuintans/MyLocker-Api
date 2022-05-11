@@ -1,5 +1,5 @@
 import { PrismaFunctionariesRepository } from '@repositories/prisma/prisma-functionaries-repository'
-import { FindFunctionaryService } from '@services/find-functionary-service'
+import { FindFunctionaryService } from '@services/functionary/find-functionary-service'
 import { Request, Response } from 'express'
 
 export class FindFunctionaryController {

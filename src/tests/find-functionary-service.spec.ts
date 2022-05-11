@@ -1,4 +1,4 @@
-import { FindFunctionaryService } from '@services/find-functionary-service'
+import { FindFunctionaryService } from '@services/functionary/find-functionary-service'
 
 const findUniqueByCpfSpy = jest.fn()
 

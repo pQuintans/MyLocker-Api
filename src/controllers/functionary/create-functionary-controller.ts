@@ -1,5 +1,5 @@
 import { PrismaFunctionariesRepository } from '@repositories/prisma/prisma-functionaries-repository'
-import { CreateFunctionaryService } from '@services/create-functionary-service'
+import { CreateFunctionaryService } from '@services/functionary/create-functionary-service'
 import { Request, Response } from 'express'
 
 export class CreateFunctionaryController {

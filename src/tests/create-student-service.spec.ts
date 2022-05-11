@@ -1,4 +1,4 @@
-import { CreateStudentService } from '@services/create-student-service'
+import { CreateStudentService } from '@services/student/create-student-service'
 
 const createStudentSpy = jest.fn()
 const findUniqueByEmailSpy = jest.fn()

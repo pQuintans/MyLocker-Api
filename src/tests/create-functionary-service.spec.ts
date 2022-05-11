@@ -1,4 +1,4 @@
-import { CreateFunctionaryService } from '@services/create-functionary-service'
+import { CreateFunctionaryService } from '@services/functionary/create-functionary-service'
 
 const createStudentSpy = jest.fn()
 const findUniqueByEmailSpy = jest.fn()

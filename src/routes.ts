@@ -1,6 +1,8 @@
-import { CreateFunctionaryController } from '@controllers/create-functionary-controller'
-import { CreateStudentController } from '@controllers/create-student-controller'
-import { FindFunctionaryController } from '@controllers/find-functionary-controller'
+import { CreateStudentController } from '@controllers/student/create-student-controller'
+
+import { CreateFunctionaryController } from '@controllers/functionary/create-functionary-controller'
+import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
+
 import express from 'express'
 
 export const router = express.Router()
