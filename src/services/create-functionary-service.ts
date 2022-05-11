@@ -42,5 +42,7 @@ export class CreateFunctionaryService {
       email,
       password: passwordHash,
     })
+
+    return
   }
 }

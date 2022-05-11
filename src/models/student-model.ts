@@ -1,9 +1,10 @@
-export interface Functionary {
-  cpf: string
+export interface Student {
+  ra: string
   first_name: string
   last_name: string
   email: string
   password: string
-  status: number
+  code?: string
+  locker_number?: number
   profile_picture_url?: string
 }

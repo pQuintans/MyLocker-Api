@@ -21,7 +21,5 @@ export class FindFunctionaryService {
     if (!functionary) {
       throw new Error('Nenhum funcionário com este CPF encontrado')
     }
-
-    return functionary
   }
 }

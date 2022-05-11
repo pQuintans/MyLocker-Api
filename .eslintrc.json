@@ -33,6 +33,7 @@
             "endOfLine": "crlf"
           }
         ],
-        "space-before-function-paren": "off"
+        "space-before-function-paren": "off",
+        "no-void": "off"
     }
 }
