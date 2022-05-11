@@ -8,6 +8,7 @@ const createStudent = new CreateStudentService({
   create: createStudentSpy,
   findUniqueByEmail: findUniqueByEmailSpy,
   findUniqueByRa: findUniqueByRaSpy,
+  updatePassword: null,
 })
 
 describe('Create student', () => {

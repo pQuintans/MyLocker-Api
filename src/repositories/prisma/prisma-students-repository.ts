@@ -4,10 +4,11 @@ import {
   StudentCreateData,
   StudentFindUniqueByEmailData,
   StudentFindUniqueByRaData,
-  studentsRepositories,
+  StudentsRepositories,
+  StudentUpdatePasswordData,
 } from '@repositories/students-repository'
 
-export class PrismaStudentsRepository implements studentsRepositories {
+export class PrismaStudentsRepository implements StudentsRepositories {
   async create({ ra, first_name, last_name, email }: StudentCreateData) {
     await prisma.student.create({
       data: {
@@ -35,6 +36,15 @@ export class PrismaStudentsRepository implements studentsRepositories {
       where: {
         email: email,
       },
+    })
+
+    return student
+  }
+
+  async updatePassword({ ra, password }: StudentUpdatePasswordData) {
+    const student = await prisma.student.update({
+      where: { ra },
+      data: { password },
     })
 
     return student

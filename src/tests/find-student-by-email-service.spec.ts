@@ -6,6 +6,7 @@ const findStudentByEmailService = new FindStudentByEmailService({
   create: null,
   findUniqueByRa: null,
   findUniqueByEmail: findUniqueByEmailSpy,
+  updatePassword: null,
 })
 
 describe('Search student by email', () => {
