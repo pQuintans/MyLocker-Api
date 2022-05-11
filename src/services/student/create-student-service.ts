@@ -1,4 +1,4 @@
-import { studentsRepositories } from '@repositories/students-repository'
+import { StudentsRepositories } from '@repositories/students-repository'
 
 interface CreateStudentServiceData {
   ra: string
@@ -8,7 +8,7 @@ interface CreateStudentServiceData {
 }
 
 export class CreateStudentService {
-  constructor(private studentsRepository: studentsRepositories) {}
+  constructor(private studentsRepository: StudentsRepositories) {}
 
   async execute(request: CreateStudentServiceData) {
     const { ra, first_name, last_name, email } = request

@@ -15,7 +15,7 @@ export interface StudentFindUniqueByEmailData {
   email: string
 }
 
-export interface studentsRepositories {
+export interface StudentsRepositories {
   create: (data: StudentCreateData) => Promise<void>
   findUniqueByRa: (data: StudentFindUniqueByRaData) => Promise<Student>
   findUniqueByEmail: (data: StudentFindUniqueByEmailData) => Promise<Student>
