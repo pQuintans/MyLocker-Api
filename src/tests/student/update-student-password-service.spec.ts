@@ -1,13 +1,7 @@
 import { UpdateStudentPasswordService } from '@services/student/update-student-password-service'
+import { studentsRepositoryTest } from './students-repository'
 
-const updatePasswordSpy = jest.fn()
-
-const updatePassword = new UpdateStudentPasswordService({
-  create: null,
-  findUniqueByRa: null,
-  findUniqueByEmail: null,
-  updatePassword: updatePasswordSpy,
-})
+const updatePassword = new UpdateStudentPasswordService(studentsRepositoryTest)
 
 describe('Search student by email', () => {
   it('should be able to change passsword', async () => {
@@ -18,7 +12,7 @@ describe('Search student by email', () => {
       })
     ).resolves.not.toThrow()
 
-    expect(updatePasswordSpy).toBeCalled()
+    expect(studentsRepositoryTest.updatePassword).toBeCalled()
   })
 
   it('should not able to change password with missing informations', async () => {
@@ -29,6 +23,6 @@ describe('Search student by email', () => {
       })
     ).rejects.toThrow()
 
-    expect(updatePasswordSpy).not.toBeCalled()
+    expect(studentsRepositoryTest.updatePassword).not.toBeCalled()
   })
 })

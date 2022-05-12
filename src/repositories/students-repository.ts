@@ -20,9 +20,17 @@ export interface StudentUpdatePasswordData {
   password: string
 }
 
+export interface StudentUpdateVerificationCodeData {
+  ra: string
+  code: string
+}
+
 export interface StudentsRepositories {
   create: (data: StudentCreateData) => Promise<void>
   findUniqueByRa: (data: StudentFindUniqueByRaData) => Promise<Student>
   findUniqueByEmail: (data: StudentFindUniqueByEmailData) => Promise<Student>
   updatePassword: (data: StudentUpdatePasswordData) => Promise<Student>
+  updateVerificationCode: (
+    data: StudentUpdateVerificationCodeData
+  ) => Promise<Student>
 }

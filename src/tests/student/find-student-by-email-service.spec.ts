@@ -1,17 +1,13 @@
 import { FindStudentByEmailService } from '@services/student/find-student-by-email-service'
+import { studentsRepositoryTest } from './students-repository'
 
-const findUniqueByEmailSpy = jest.fn()
-
-const findStudentByEmailService = new FindStudentByEmailService({
-  create: null,
-  findUniqueByRa: null,
-  findUniqueByEmail: findUniqueByEmailSpy,
-  updatePassword: null,
-})
+const findStudentByEmailService = new FindStudentByEmailService(
+  studentsRepositoryTest
+)
 
 describe('Search student by email', () => {
   it('should be able to find a student', async () => {
-    findUniqueByEmailSpy.mockReturnValueOnce({
+    studentsRepositoryTest.findUniqueByEmail.mockReturnValueOnce({
       ra: '200146',
       first_name: 'Pedro',
       last_name: 'Quintans',
@@ -24,7 +20,7 @@ describe('Search student by email', () => {
       })
     ).resolves.not.toThrow()
 
-    expect(findUniqueByEmailSpy).toBeCalled()
+    expect(studentsRepositoryTest.findUniqueByEmail).toBeCalled()
   })
 
   it('should not be able to search an student without an E-Mail', async () => {
@@ -34,7 +30,7 @@ describe('Search student by email', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByEmailSpy).not.toBeCalled()
+    expect(studentsRepositoryTest.findUniqueByEmail).not.toBeCalled()
   })
 
   it('should not be able to find an student with an unrigistered E-Mail', async () => {
@@ -46,6 +42,6 @@ describe('Search student by email', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByEmailSpy).toBeCalled()
+    expect(studentsRepositoryTest.findUniqueByEmail).toBeCalled()
   })
 })

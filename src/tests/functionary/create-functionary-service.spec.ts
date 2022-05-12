@@ -1,14 +1,9 @@
 import { CreateFunctionaryService } from '@services/functionary/create-functionary-service'
+import { functionariesRepositoryTest } from './functionaries-repository'
 
-const createStudentSpy = jest.fn()
-const findUniqueByEmailSpy = jest.fn()
-const findUniqueByCpfSpy = jest.fn()
-
-const createFunctionary = new CreateFunctionaryService({
-  create: createStudentSpy,
-  findUniqueByEmail: findUniqueByEmailSpy,
-  findUniqueByCpf: findUniqueByCpfSpy,
-})
+const createFunctionary = new CreateFunctionaryService(
+  functionariesRepositoryTest
+)
 
 describe('Create functionary', () => {
   it('should be able to create a functionary', async () => {
@@ -22,9 +17,9 @@ describe('Create functionary', () => {
       })
     ).resolves.not.toThrow()
 
-    expect(findUniqueByCpfSpy).toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).toHaveBeenCalled()
-    expect(createStudentSpy).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByCpf).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByEmail).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.create).toHaveBeenCalled()
   })
 
   it('should not be able to create a functionary with missing informations', async () => {
@@ -38,13 +33,13 @@ describe('Create functionary', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByCpfSpy).not.toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).not.toHaveBeenCalled()
-    expect(createStudentSpy).not.toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByCpf).not.toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByEmail).not.toHaveBeenCalled()
+    expect(functionariesRepositoryTest.create).not.toHaveBeenCalled()
   })
 
   it('should not be able to create a functionary with an already registered CPF', async () => {
-    findUniqueByCpfSpy.mockReturnValueOnce({
+    functionariesRepositoryTest.findUniqueByCpf.mockReturnValueOnce({
       cpf: '123',
       first_name: 'Pedro',
       last_name: 'Quintans',
@@ -62,13 +57,13 @@ describe('Create functionary', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByCpfSpy).toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).not.toHaveBeenCalled()
-    expect(createStudentSpy).not.toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByCpf).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByEmail).not.toHaveBeenCalled()
+    expect(functionariesRepositoryTest.create).not.toHaveBeenCalled()
   })
 
   it('should not be able to create a functionary with an already registered E-Mail', async () => {
-    findUniqueByEmailSpy.mockReturnValue({
+    functionariesRepositoryTest.findUniqueByEmail.mockReturnValue({
       cpf: '123',
       first_name: 'Fábio',
       last_name: 'Henrique',
@@ -86,8 +81,8 @@ describe('Create functionary', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByCpfSpy).toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).toHaveBeenCalled()
-    expect(createStudentSpy).not.toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByCpf).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByEmail).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.create).not.toHaveBeenCalled()
   })
 })

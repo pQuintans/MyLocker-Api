@@ -1,16 +1,13 @@
 import { FindFunctionaryService } from '@services/functionary/find-functionary-service'
+import { functionariesRepositoryTest } from './functionaries-repository'
 
-const findUniqueByCpfSpy = jest.fn()
-
-const findFunctionaryService = new FindFunctionaryService({
-  create: null,
-  findUniqueByCpf: findUniqueByCpfSpy,
-  findUniqueByEmail: null,
-})
+const findFunctionaryService = new FindFunctionaryService(
+  functionariesRepositoryTest
+)
 
 describe('Search functionary', () => {
   it('should be able to find a functionary', async () => {
-    findUniqueByCpfSpy.mockReturnValueOnce({
+    functionariesRepositoryTest.findUniqueByCpf.mockReturnValueOnce({
       cpf: '123',
       first_name: 'Fábio',
       last_name: 'Henrique',
@@ -24,7 +21,7 @@ describe('Search functionary', () => {
       })
     ).resolves.not.toThrow()
 
-    expect(findUniqueByCpfSpy).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByCpf).toHaveBeenCalled()
   })
 
   it('should not be able to find a functionary without an CPF', async () => {
@@ -34,7 +31,7 @@ describe('Search functionary', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByCpfSpy).not.toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByCpf).not.toHaveBeenCalled()
   })
 
   it('should not be able to find a functionary with an unrigestered CPF', async () => {
@@ -46,6 +43,6 @@ describe('Search functionary', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByCpfSpy).toHaveBeenCalled()
+    expect(functionariesRepositoryTest.findUniqueByCpf).toHaveBeenCalled()
   })
 })

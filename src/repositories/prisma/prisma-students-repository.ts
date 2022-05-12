@@ -6,6 +6,7 @@ import {
   StudentFindUniqueByRaData,
   StudentsRepositories,
   StudentUpdatePasswordData,
+  StudentUpdateVerificationCodeData,
 } from '@repositories/students-repository'
 
 export class PrismaStudentsRepository implements StudentsRepositories {
@@ -45,6 +46,18 @@ export class PrismaStudentsRepository implements StudentsRepositories {
     const student = await prisma.student.update({
       where: { ra },
       data: { password },
+    })
+
+    return student
+  }
+
+  async updateVerificationCode({
+    ra,
+    code,
+  }: StudentUpdateVerificationCodeData) {
+    const student = await prisma.student.update({
+      where: { ra },
+      data: { code },
     })
 
     return student

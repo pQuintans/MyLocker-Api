@@ -1,15 +1,7 @@
 import { CreateStudentService } from '@services/student/create-student-service'
+import { studentsRepositoryTest } from './students-repository'
 
-const createStudentSpy = jest.fn()
-const findUniqueByEmailSpy = jest.fn()
-const findUniqueByRaSpy = jest.fn()
-
-const createStudent = new CreateStudentService({
-  create: createStudentSpy,
-  findUniqueByEmail: findUniqueByEmailSpy,
-  findUniqueByRa: findUniqueByRaSpy,
-  updatePassword: null,
-})
+const createStudent = new CreateStudentService(studentsRepositoryTest)
 
 describe('Create student', () => {
   it('should be able to create a student', async () => {
@@ -22,9 +14,9 @@ describe('Create student', () => {
       })
     ).resolves.not.toThrow()
 
-    expect(createStudentSpy).toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).toHaveBeenCalled()
-    expect(findUniqueByRaSpy).toHaveBeenCalled()
+    expect(studentsRepositoryTest.create).toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByEmail).toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByRa).toHaveBeenCalled()
   })
 
   it('should not be able to create a student with missing informations', async () => {
@@ -37,13 +29,13 @@ describe('Create student', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByRaSpy).not.toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).not.toHaveBeenCalled()
-    expect(createStudentSpy).not.toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByRa).not.toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByEmail).not.toHaveBeenCalled()
+    expect(studentsRepositoryTest.create).not.toHaveBeenCalled()
   })
 
   it('should not be able to create a student with an already registered RA', async () => {
-    findUniqueByRaSpy.mockReturnValue({
+    studentsRepositoryTest.findUniqueByRa.mockReturnValue({
       ra: '200146',
       first_name: 'Pedro',
       last_name: 'Quintans',
@@ -59,20 +51,20 @@ describe('Create student', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByRaSpy).toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).not.toHaveBeenCalled()
-    expect(createStudentSpy).not.toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByRa).toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByEmail).not.toHaveBeenCalled()
+    expect(studentsRepositoryTest.create).not.toHaveBeenCalled()
   })
 
   it('should not be able to create a student with an already registered E-Mail', async () => {
-    findUniqueByRaSpy.mockReset()
+    studentsRepositoryTest.findUniqueByRa.mockReset()
 
-    findUniqueByEmailSpy.mockReturnValue({
+    studentsRepositoryTest.findUniqueByEmail.mockReturnValue({
       ra: '200126',
       first_name: 'Fábio',
       last_name: 'Henrique',
       email: 'email@g.unicamp.br',
-    }) //If 'findUniqueByEmailSpy' returns something, an Student with that E-Mail exists
+    }) //If 'studentsRepositoryTest.findUniqueByEmail' returns something, an Student with that E-Mail exists
 
     await expect(
       createStudent.execute({
@@ -83,8 +75,8 @@ describe('Create student', () => {
       })
     ).rejects.toThrow()
 
-    expect(findUniqueByRaSpy).toHaveBeenCalled()
-    expect(findUniqueByEmailSpy).toHaveBeenCalled()
-    expect(createStudentSpy).not.toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByRa).toHaveBeenCalled()
+    expect(studentsRepositoryTest.findUniqueByEmail).toHaveBeenCalled()
+    expect(studentsRepositoryTest.create).not.toHaveBeenCalled()
   })
 })
