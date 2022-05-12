@@ -7,7 +7,7 @@ interface UpdateStudentPasswordServiceData {
 }
 
 export class UpdateStudentPasswordService {
-  constructor(private studentRepository: StudentsRepositories) {}
+  constructor(private studentsRepository: StudentsRepositories) {}
 
   async execute(request: UpdateStudentPasswordServiceData) {
     const { ra, password } = request
@@ -18,7 +18,7 @@ export class UpdateStudentPasswordService {
 
     const hashPassword = await hash(password, 8)
 
-    const student = await this.studentRepository.updatePassword({
+    const student = await this.studentsRepository.updatePassword({
       ra,
       password: hashPassword,
     })

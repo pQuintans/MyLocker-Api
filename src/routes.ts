@@ -1,5 +1,6 @@
 import { CreateStudentController } from '@controllers/student/create-student-controller'
 import { FindStudentByEmailController } from '@controllers/student/find-student-by-email-controller'
+import { UpdateStudentPasswordController } from '@controllers/student/update-student-passowrd-controller'
 
 import { CreateFunctionaryController } from '@controllers/functionary/create-functionary-controller'
 import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
@@ -13,9 +14,11 @@ const findFunctionaryController = new FindFunctionaryController()
 
 const createStudentController = new CreateStudentController()
 const findStudentByEmailController = new FindStudentByEmailController()
+const updateStudentPasswordController = new UpdateStudentPasswordController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
 
 router.post('/students', createStudentController.handle)
 router.get('/students/:email', findStudentByEmailController.handle)
+router.put('/students/update-password', updateStudentPasswordController.handle)

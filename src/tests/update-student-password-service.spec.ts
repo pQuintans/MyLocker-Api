@@ -1,27 +1,34 @@
-// import { FindStudentByEmailService } from '@services/student/find-student-by-email-service'
+import { UpdateStudentPasswordService } from '@services/student/update-student-password-service'
 
-// const updatePasswordSpy = jest.fn()
+const updatePasswordSpy = jest.fn()
 
-// const findStudentByEmailService = new FindStudentByEmailService({
-//   create: null,
-//   findUniqueByRa: null,
-//   findUniqueByEmail: null,
-//   updatePassword: updatePasswordSpy,
-// })
+const updatePassword = new UpdateStudentPasswordService({
+  create: null,
+  findUniqueByRa: null,
+  findUniqueByEmail: null,
+  updatePassword: updatePasswordSpy,
+})
 
-// describe('Search student by email', () => {
-//   it('should be able to find a student', async () => {
-//     updatePasswordSpy.mockReturnValueOnce({
-//       ra: '200146',
-//       first_name: 'Pedro',
-//     }) //if 'findUniqueByEmailSpy' returns something, an student was found
+describe('Search student by email', () => {
+  it('should be able to change passsword', async () => {
+    await expect(
+      updatePassword.execute({
+        ra: '200146',
+        password: '123',
+      })
+    ).resolves.not.toThrow()
 
-//     await expect(
-//       findStudentByEmailService.execute({
-//         email: 'cl200146@g.unicamp.br',
-//       })
-//     ).resolves.not.toThrow()
+    expect(updatePasswordSpy).toBeCalled()
+  })
 
-//     expect(updatePasswordSpy).toBeCalled()
-//   })
-// })
+  it('should not able to change password with missing informations', async () => {
+    await expect(
+      updatePassword.execute({
+        ra: '',
+        password: '',
+      })
+    ).rejects.toThrow()
+
+    expect(updatePasswordSpy).not.toBeCalled()
+  })
+})
