@@ -32,16 +32,17 @@ export class SetStudentVerificationCodeService {
       code: randomCode,
     })
 
+    const studentsFullName = `${student.first_name} ${student.last_name}`
+
     await this.mailAdapter.sendMail({
-      subjectName: student.first_name + student.last_name,
+      subjectName: studentsFullName,
       subject: student.email,
       body: [
         '<div style="font-family: sans-serif; font-size: 16px; color: #111">',
-        `<p>Seu código de verificação é ${randomCode}</p>`,
+        `<p>Oi ${studentsFullName},`,
+        `<p>Seu código de verificação é <b>${randomCode}</b></p>`,
         '<div>',
       ].join('\n'),
     })
-
-    return randomCode
   }
 }

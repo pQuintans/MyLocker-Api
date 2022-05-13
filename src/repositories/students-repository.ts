@@ -29,8 +29,8 @@ export interface StudentsRepositories {
   create: (data: StudentCreateData) => Promise<void>
   findUniqueByRa: (data: StudentFindUniqueByRaData) => Promise<Student>
   findUniqueByEmail: (data: StudentFindUniqueByEmailData) => Promise<Student>
-  updatePassword: (data: StudentUpdatePasswordData) => Promise<Student>
+  updatePassword: (data: StudentUpdatePasswordData) => Promise<void>
   updateVerificationCode: (
     data: StudentUpdateVerificationCodeData
-  ) => Promise<Student>
+  ) => Promise<void>
 }

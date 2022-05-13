@@ -43,23 +43,19 @@ export class PrismaStudentsRepository implements StudentsRepositories {
   }
 
   async updatePassword({ ra, password }: StudentUpdatePasswordData) {
-    const student = await prisma.student.update({
+    await prisma.student.update({
       where: { ra },
       data: { password },
     })
-
-    return student
   }
 
   async updateVerificationCode({
     ra,
     code,
   }: StudentUpdateVerificationCodeData) {
-    const student = await prisma.student.update({
+    await prisma.student.update({
       where: { ra },
       data: { code },
     })
-
-    return student
   }
 }

@@ -6,6 +6,7 @@ import { CreateFunctionaryController } from '@controllers/functionary/create-fun
 import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
 
 import express from 'express'
+import { SetStudentVerificationCodeController } from '@controllers/student/set-student-verification-code-controller'
 
 export const router = express.Router()
 
@@ -15,6 +16,8 @@ const findFunctionaryController = new FindFunctionaryController()
 const createStudentController = new CreateStudentController()
 const findStudentByEmailController = new FindStudentByEmailController()
 const updateStudentPasswordController = new UpdateStudentPasswordController()
+const setStudentVerificationCodeController =
+  new SetStudentVerificationCodeController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
@@ -22,3 +25,7 @@ router.get('/functionaries/:cpf', findFunctionaryController.handle)
 router.post('/students', createStudentController.handle)
 router.get('/students/:email', findStudentByEmailController.handle)
 router.put('/students/update-password', updateStudentPasswordController.handle)
+router.put(
+  '/students/generate-code',
+  setStudentVerificationCodeController.handle
+)

@@ -18,11 +18,9 @@ export class UpdateStudentPasswordService {
 
     const hashPassword = await hash(password, 8)
 
-    const student = await this.studentsRepository.updatePassword({
+    await this.studentsRepository.updatePassword({
       ra,
       password: hashPassword,
     })
-
-    return student
   }
 }

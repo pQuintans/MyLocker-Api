@@ -11,11 +11,11 @@ export class UpdateStudentPasswordController {
       prismaStudentsRepository
     )
 
-    const updateStudentPasswordResponse = updateStudentPasswordService.execute({
+    updateStudentPasswordService.execute({
       ra,
       password,
     })
 
-    return res.status(200).json(updateStudentPasswordResponse)
+    return res.status(204)
   }
 }
