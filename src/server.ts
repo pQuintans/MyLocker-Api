@@ -7,7 +7,7 @@ import { router } from './routes'
 const app = express()
 
 app.use(express.json())
-app.use('/profile-picture', express.static('upload/images'))
+// app.use('/profile-picture', express.static('upload/images'))
 app.use(router)
 
 app.use(handleErrorsMiddleware)
