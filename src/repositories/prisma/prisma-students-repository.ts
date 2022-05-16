@@ -6,6 +6,7 @@ import {
   StudentFindUniqueByRaData,
   StudentsRepositories,
   StudentUpdatePasswordData,
+  StudentUpdateProfilePictureData,
   StudentUpdateVerificationCodeData,
 } from '@repositories/students-repository'
 
@@ -56,6 +57,13 @@ export class PrismaStudentsRepository implements StudentsRepositories {
     await prisma.student.update({
       where: { ra },
       data: { code },
+    })
+  }
+
+  async updateProfilePicture({ ra, url }: StudentUpdateProfilePictureData) {
+    await prisma.student.update({
+      where: { ra },
+      data: { profile_picture_url: url },
     })
   }
 }

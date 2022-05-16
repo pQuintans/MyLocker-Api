@@ -24,6 +24,10 @@ export interface StudentUpdateVerificationCodeData {
   ra: string
   code: string
 }
+export interface StudentUpdateProfilePictureData {
+  ra: string
+  url: string
+}
 
 export interface StudentsRepositories {
   create: (data: StudentCreateData) => Promise<void>
@@ -33,4 +37,6 @@ export interface StudentsRepositories {
   updateVerificationCode: (
     data: StudentUpdateVerificationCodeData
   ) => Promise<void>
+
+  updateProfilePicture: (data: StudentUpdateProfilePictureData) => Promise<void>
 }
