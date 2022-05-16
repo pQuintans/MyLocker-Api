@@ -38,10 +38,10 @@ router.put(
   setStudentVerificationCodeController.handle
 )
 
-router.post(
-  '/upload',
-  upload.single('profile'),
-  setProfilePictureStudentController.handle
-)
+// router.post(
+//   '/upload',
+//   upload.single('profile'),
+//   setProfilePictureStudentController.handle
+// )
 
 router.get('/lockers', listAllLockersController.handle)
