@@ -34,11 +34,11 @@ model functionary {
 }
 
 model locker {
-  number        Int       @id
-  isRented      Int       @db.TinyInt
-  rentedAt      DateTime?
+  number        Int     @id
+  isRented      Int     @db.TinyInt
+  rentedAt      String?
   FK_section_id Int
-  status        Int       @default(1) @db.TinyInt
+  status        Int     @default(1) @db.TinyInt
 
   section section   @relation(fields: [FK_section_id], references: [id], onDelete: Cascade, map: "FKSectionIdLocker")
   student student[]

@@ -11,6 +11,7 @@ import { CreateFunctionaryController } from '@controllers/functionary/create-fun
 import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
 
 import { ListAllLockersController } from '@controllers/locker/list-all-lockers-controller'
+import { CreateLockerController } from '@controllers/locker/create-locker-controller'
 
 export const router = express.Router()
 
@@ -26,6 +27,7 @@ const setProfilePictureStudentController =
   new SetProfilePictureStudentController()
 
 const listAllLockersController = new ListAllLockersController()
+const createLockerController = new CreateLockerController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
@@ -45,3 +47,4 @@ router.post(
 )
 
 router.get('/lockers', listAllLockersController.handle)
+router.post('/lockers', createLockerController.handle)
