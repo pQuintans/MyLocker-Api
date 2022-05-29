@@ -15,6 +15,8 @@ import { CreateLockerController } from '@controllers/locker/create-locker-contro
 
 import { CreateSectionController } from '@controllers/section/create-section-controller'
 
+import { CreateApmController } from '@controllers/apm/create-apm-controller'
+
 export const router = express.Router()
 
 const createFunctionaryController = new CreateFunctionaryController()
@@ -32,6 +34,8 @@ const listAllLockersController = new ListAllLockersController()
 const createLockerController = new CreateLockerController()
 
 const createSectionController = new CreateSectionController()
+
+const createApmController = new CreateApmController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
@@ -54,3 +58,5 @@ router.get('/lockers', listAllLockersController.handle)
 router.post('/lockers', createLockerController.handle)
 
 router.post('/sections', createSectionController.handle)
+
+router.post('/apms', createApmController.handle)
