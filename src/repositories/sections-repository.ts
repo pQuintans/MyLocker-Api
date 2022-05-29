@@ -1,10 +1,9 @@
-interface SectionCreateData {
-  id: number
+export interface SectionCreateData {
   color: string
   left_room: string
   right_room: string
 }
 
-export interface SectionInterface {
+export interface SectionsRepositories {
   create: (data: SectionCreateData) => Promise<void>
 }

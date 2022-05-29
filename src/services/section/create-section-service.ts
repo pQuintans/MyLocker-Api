@@ -7,11 +7,17 @@ interface CreateSectionServiceData {
 export class CreateSectionService {
   constructor(private sectionsRepository) {}
 
-  async handle(request: CreateSectionServiceData) {
+  async execute(request: CreateSectionServiceData) {
     const { color, left_room, right_room } = request
 
     if (!color || !left_room || !right_room) {
       throw new Error('Faltam informações')
+    }
+
+    if (left_room == right_room) {
+      throw new Error(
+        'As salas na direita e na esquerda da seção não podem ser iguais'
+      )
     }
 
     await this.sectionsRepository.create({
