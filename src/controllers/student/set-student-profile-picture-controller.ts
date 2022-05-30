@@ -2,7 +2,7 @@ import { PrismaStudentsRepository } from '@repositories/prisma/prisma-students-r
 import { SetStudentProfilePictureService } from '@services/student/set-student-profile-picture-service'
 import { Request, Response } from 'express'
 
-export class SetProfilePictureStudentController {
+export class SetStudentProfilePictureController {
   async handle(req: Request, res: Response) {
     const { ra } = req.body
 
@@ -11,7 +11,7 @@ export class SetProfilePictureStudentController {
       prismaStudentRepository
     )
 
-    const url = `${req.headers.host}/profile-picture/${req.file.filename}`
+    const url = `http://${req.headers.host}/profile-picture/${req.file.filename}`
 
     const student = await setProfilePictureStudentService.execute({
       ra,

@@ -5,7 +5,7 @@ import { CreateStudentController } from '@controllers/student/create-student-con
 import { FindStudentByEmailController } from '@controllers/student/find-student-by-email-controller'
 import { UpdateStudentPasswordController } from '@controllers/student/update-student-passowrd-controller'
 import { SetStudentVerificationCodeController } from '@controllers/student/set-student-verification-code-controller'
-import { SetProfilePictureStudentController } from '@controllers/student/set-student-profile-controller'
+import { SetStudentProfilePictureController } from '@controllers/student/set-student-profile-picture-controller'
 
 import { CreateFunctionaryController } from '@controllers/functionary/create-functionary-controller'
 import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
@@ -27,8 +27,8 @@ const findStudentByEmailController = new FindStudentByEmailController()
 const updateStudentPasswordController = new UpdateStudentPasswordController()
 const setStudentVerificationCodeController =
   new SetStudentVerificationCodeController()
-const setProfilePictureStudentController =
-  new SetProfilePictureStudentController()
+const setStudentProfilePictureController =
+  new SetStudentProfilePictureController()
 
 const listAllLockersController = new ListAllLockersController()
 const createLockerController = new CreateLockerController()
@@ -51,7 +51,7 @@ router.put(
 router.post(
   '/upload',
   upload.single('profile'),
-  setProfilePictureStudentController.handle
+  setStudentProfilePictureController.handle
 )
 
 router.get('/lockers', listAllLockersController.handle)
