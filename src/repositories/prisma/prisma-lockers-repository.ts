@@ -7,7 +7,11 @@ import { prisma } from '../../prisma'
 
 export class PrismaLockersRepository implements LockersRepositories {
   async listAll() {
-    const lockers = await prisma.locker.findMany()
+    const lockers = await prisma.locker.findMany({
+      include: {
+        section: true,
+      },
+    })
     return lockers
   }
 
