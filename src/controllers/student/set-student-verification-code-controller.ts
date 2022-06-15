@@ -5,7 +5,7 @@ import { Request, Response } from 'express'
 
 export class SetStudentVerificationCodeController {
   async handle(req: Request, res: Response) {
-    const { ra } = req.body
+    const { email } = req.body
 
     const prismaStudentsRepository = new PrismaStudentsRepository()
     const nodemailerMailAdapter = new NodemailerMailAdapter()
@@ -16,10 +16,10 @@ export class SetStudentVerificationCodeController {
         nodemailerMailAdapter
       )
 
-    setStudentVerificationCodeService.execute({
-      ra,
+    const randomCode = await setStudentVerificationCodeService.execute({
+      email,
     })
 
-    return res.status(204).send()
+    return res.status(200).json({ randomCode: randomCode })
   }
 }

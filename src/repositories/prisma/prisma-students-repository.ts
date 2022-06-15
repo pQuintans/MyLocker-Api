@@ -51,11 +51,11 @@ export class PrismaStudentsRepository implements StudentsRepositories {
   }
 
   async updateVerificationCode({
-    ra,
+    email,
     code,
   }: StudentUpdateVerificationCodeData) {
     await prisma.student.update({
-      where: { ra },
+      where: { email },
       data: { code },
     })
   }

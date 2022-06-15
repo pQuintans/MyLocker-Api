@@ -3,7 +3,7 @@ import { StudentsRepositories } from '@repositories/students-repository'
 import randomstring from 'randomstring'
 
 interface SetStudentVerificationCodeServiceData {
-  ra: string
+  email: string
 }
 
 export class SetStudentVerificationCodeService {
@@ -13,22 +13,22 @@ export class SetStudentVerificationCodeService {
   ) {}
 
   async execute(request: SetStudentVerificationCodeServiceData) {
-    const { ra } = request
+    const { email } = request
 
-    if (!ra) {
+    if (!email) {
       throw new Error('Faltam informações')
     }
 
-    const student = await this.studentsRepository.findUniqueByRa({ ra })
+    const student = await this.studentsRepository.findUniqueByEmail({ email })
 
     if (!student) {
-      throw new Error('Nenhum aluno com este RA encontrado')
+      throw new Error('Nenhum aluno com este E-mail encontrado')
     }
 
     const randomCode = randomstring.generate(6)
 
     await this.studentsRepository.updateVerificationCode({
-      ra,
+      email,
       code: randomCode,
     })
 
@@ -44,5 +44,7 @@ export class SetStudentVerificationCodeService {
         '<div>',
       ].join('\n'),
     })
+
+    return randomCode
   }
 }

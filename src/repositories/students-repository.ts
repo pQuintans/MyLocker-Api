@@ -21,7 +21,7 @@ export interface StudentUpdatePasswordData {
 }
 
 export interface StudentUpdateVerificationCodeData {
-  ra: string
+  email: string
   code: string
 }
 export interface StudentUpdateProfilePictureData {
