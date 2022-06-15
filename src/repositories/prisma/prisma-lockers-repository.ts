@@ -20,6 +20,9 @@ export class PrismaLockersRepository implements LockersRepositories {
       where: {
         number: number,
       },
+      include: {
+        section: true,
+      },
     })
 
     return locker

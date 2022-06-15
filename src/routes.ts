@@ -10,12 +10,14 @@ import { SetStudentProfilePictureController } from '@controllers/student/set-stu
 import { CreateFunctionaryController } from '@controllers/functionary/create-functionary-controller'
 import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
 
-import { ListAllLockersController } from '@controllers/locker/list-all-lockers-controller'
 import { CreateLockerController } from '@controllers/locker/create-locker-controller'
+import { ListAllLockersController } from '@controllers/locker/list-all-lockers-controller'
 
 import { CreateSectionController } from '@controllers/section/create-section-controller'
 
 import { CreateApmController } from '@controllers/apm/create-apm-controller'
+import { AuthenticateStudentController } from '@controllers/student/authenticate-student-controller'
+import { VerifyPasswordExistenceStudentController } from '@controllers/student/verify-password-existence-student-controller'
 
 export const router = express.Router()
 
@@ -30,12 +32,16 @@ const setStudentVerificationCodeController =
 const setStudentProfilePictureController =
   new SetStudentProfilePictureController()
 
-const listAllLockersController = new ListAllLockersController()
 const createLockerController = new CreateLockerController()
+const listAllLockersController = new ListAllLockersController()
 
 const createSectionController = new CreateSectionController()
 
 const createApmController = new CreateApmController()
+
+const authenticateStudentController = new AuthenticateStudentController()
+const verifyPasswordExistenceStudentController =
+  new VerifyPasswordExistenceStudentController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
@@ -54,9 +60,15 @@ router.post(
   setStudentProfilePictureController.handle
 )
 
-router.get('/lockers', listAllLockersController.handle)
 router.post('/lockers', createLockerController.handle)
+router.get('/lockers', listAllLockersController.handle)
 
 router.post('/sections', createSectionController.handle)
 
 router.post('/apms', createApmController.handle)
+
+router.post('/students/session', authenticateStudentController.handle)
+router.post(
+  '/students/verifyPassword',
+  verifyPasswordExistenceStudentController.handle
+)
