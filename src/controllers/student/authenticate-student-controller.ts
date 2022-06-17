@@ -20,6 +20,7 @@ export class AuthenticateStudentController {
       .status(202)
       .cookie('token', token, {
         sameSite: 'none',
+        secure: request.headers.host == 'localhost:3000' ? false : true,
         path: '/',
         expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
         httpOnly: true,
