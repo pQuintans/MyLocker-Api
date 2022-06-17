@@ -19,7 +19,6 @@ export class SetStudentLockerNumberController {
     return res
       .status(200)
       .cookie('token', token, {
-        sameSite: 'strict',
         path: '/',
         expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
         httpOnly: true,

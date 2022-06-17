@@ -19,7 +19,6 @@ export class AuthenticateStudentController {
     return response
       .status(202)
       .cookie('token', token, {
-        sameSite: 'strict',
         path: '/',
         expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
         httpOnly: true,
