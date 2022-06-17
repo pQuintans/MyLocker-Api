@@ -8,8 +8,15 @@ export interface LockerFindUniqueByNumberData {
   number: number
 }
 
+export interface LockerSetIsRentedData {
+  number: number
+  isRented: number
+  rentedAt: string | null
+}
+
 export interface LockersRepositories {
   create: (data: LockerCreateData) => Promise<void>
   listAll: () => Promise<Locker[]>
   findUniqueByNumber: (data: LockerFindUniqueByNumberData) => Promise<Locker>
+  setLockerIsRented: (data: LockerSetIsRentedData) => Promise<void>
 }

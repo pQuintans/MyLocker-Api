@@ -1,6 +1,7 @@
 import {
   LockerCreateData,
   LockerFindUniqueByNumberData,
+  LockerSetIsRentedData,
   LockersRepositories,
 } from '@repositories/lockers-repository'
 import { prisma } from '../../prisma'
@@ -35,6 +36,22 @@ export class PrismaLockersRepository implements LockersRepositories {
         FK_section_id,
         isRented: 0,
         status: 1,
+      },
+    })
+  }
+
+  async setLockerIsRented({
+    number,
+    isRented,
+    rentedAt,
+  }: LockerSetIsRentedData) {
+    await prisma.locker.update({
+      where: {
+        number,
+      },
+      data: {
+        isRented,
+        rentedAt,
       },
     })
   }

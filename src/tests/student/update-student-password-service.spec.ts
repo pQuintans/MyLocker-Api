@@ -3,11 +3,11 @@ import { studentsRepositoryTest } from './students-repository'
 
 const updatePassword = new UpdateStudentPasswordService(studentsRepositoryTest)
 
-describe('Search student by email', () => {
+describe('Change students passwod', () => {
   it('should be able to change passsword', async () => {
     await expect(
       updatePassword.execute({
-        ra: '200146',
+        email: 'cl200146@g.unicamp.br',
         password: '123',
       })
     ).resolves.not.toThrow()
@@ -18,7 +18,7 @@ describe('Search student by email', () => {
   it('should not able to change password with missing informations', async () => {
     await expect(
       updatePassword.execute({
-        ra: '',
+        email: '',
         password: '',
       })
     ).rejects.toThrow()

@@ -16,7 +16,7 @@ export interface StudentFindUniqueByEmailData {
 }
 
 export interface StudentUpdatePasswordData {
-  ra: string
+  email: string
   password: string
 }
 
@@ -24,9 +24,15 @@ export interface StudentUpdateVerificationCodeData {
   email: string
   code: string
 }
+
 export interface StudentUpdateProfilePictureData {
   ra: string
   url: string
+}
+
+export interface StudentUpdateLockerNumberData {
+  ra: string
+  lockerNumber: number
 }
 
 export interface StudentsRepositories {
@@ -39,4 +45,5 @@ export interface StudentsRepositories {
   ) => Promise<void>
 
   updateProfilePicture: (data: StudentUpdateProfilePictureData) => Promise<void>
+  updateLockerNumber: (data: StudentUpdateLockerNumberData) => Promise<void>
 }

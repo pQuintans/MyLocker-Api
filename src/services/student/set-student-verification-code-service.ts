@@ -40,7 +40,7 @@ export class SetStudentVerificationCodeService {
       body: [
         '<div style="font-family: sans-serif; font-size: 16px; color: #111">',
         `<p>Oi ${studentsFullName},`,
-        `<p>Seu código de verificação é <b>${randomCode}</b></p>`,
+        `<p>Seu código de verificação é <b style="font-family: fixed-width">${randomCode}</b></p>`,
         '<div>',
       ].join('\n'),
     })

@@ -4,16 +4,17 @@ import { Request, Response } from 'express'
 
 export class UpdateStudentPasswordController {
   async handle(req: Request, res: Response) {
-    const { ra, password } = req.body
+    const { email, password, oldPassword } = req.body
 
     const prismaStudentsRepository = new PrismaStudentsRepository()
     const updateStudentPasswordService = new UpdateStudentPasswordService(
       prismaStudentsRepository
     )
 
-    updateStudentPasswordService.execute({
-      ra,
+    await updateStudentPasswordService.execute({
+      email,
       password,
+      oldPassword,
     })
 
     return res.status(204).send()

@@ -13,11 +13,19 @@ export class SetStudentProfilePictureController {
 
     const url = `http://${req.headers.host}/profile-picture/${req.file.filename}`
 
-    const student = await setProfilePictureStudentService.execute({
+    const { student, token } = await setProfilePictureStudentService.execute({
       ra,
       url,
     })
 
-    return res.status(200).json(student)
+    return res
+      .status(200)
+      .cookie('token', token, {
+        sameSite: 'strict',
+        path: '/',
+        expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+        httpOnly: true,
+      })
+      .json(student)
   }
 }

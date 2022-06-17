@@ -5,6 +5,7 @@ import {
   StudentFindUniqueByEmailData,
   StudentFindUniqueByRaData,
   StudentsRepositories,
+  StudentUpdateLockerNumberData,
   StudentUpdatePasswordData,
   StudentUpdateProfilePictureData,
   StudentUpdateVerificationCodeData,
@@ -43,9 +44,9 @@ export class PrismaStudentsRepository implements StudentsRepositories {
     return student
   }
 
-  async updatePassword({ ra, password }: StudentUpdatePasswordData) {
+  async updatePassword({ email, password }: StudentUpdatePasswordData) {
     await prisma.student.update({
-      where: { ra },
+      where: { email },
       data: { password },
     })
   }
@@ -64,6 +65,16 @@ export class PrismaStudentsRepository implements StudentsRepositories {
     await prisma.student.update({
       where: { ra },
       data: { profile_picture_url: url },
+    })
+  }
+
+  async updateLockerNumber({
+    ra,
+    lockerNumber,
+  }: StudentUpdateLockerNumberData) {
+    await prisma.student.update({
+      where: { ra },
+      data: { locker_number: lockerNumber },
     })
   }
 }

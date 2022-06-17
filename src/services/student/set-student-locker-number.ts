@@ -1,18 +1,18 @@
 import { StudentsRepositories } from '@repositories/students-repository'
 import { sign } from 'jsonwebtoken'
 
-interface SetStudentProfilePictureServiceData {
+interface SetStudentLockerNumberData {
   ra: string
-  url: string
+  lockerNumber: number
 }
 
-export class SetStudentProfilePictureService {
+export class SetStudentLockerNumber {
   constructor(private studentsRepository: StudentsRepositories) {}
 
-  async execute(request: SetStudentProfilePictureServiceData) {
-    const { ra, url } = request
+  async execute(request: SetStudentLockerNumberData) {
+    const { ra, lockerNumber } = request
 
-    if (!ra || !url) {
+    if (!ra || !lockerNumber) {
       throw new Error('Faltam informações')
     }
 
@@ -22,15 +22,15 @@ export class SetStudentProfilePictureService {
       throw new Error('Nenhum aluno com este RA encontrado')
     }
 
-    student.profile_picture_url = url
+    student.locker_number = lockerNumber
 
     const studentToken = {
       ra: student.ra,
       first_name: student.first_name,
       last_name: student.last_name,
       email: student.email,
-      locker_number: student.locker_number,
-      profile_picture_url: url,
+      locker_number: lockerNumber,
+      profile_picture_url: student.profile_picture_url,
     }
 
     const token = sign(studentToken, process.env.TOKEN_SECRET_KEY, {
@@ -38,7 +38,7 @@ export class SetStudentProfilePictureService {
       expiresIn: '1d',
     })
 
-    await this.studentsRepository.updateProfilePicture({ ra, url })
+    await this.studentsRepository.updateLockerNumber({ ra, lockerNumber })
 
     return { student, token }
   }

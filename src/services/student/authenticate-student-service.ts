@@ -17,36 +17,34 @@ export class AuthenticateStudentService {
       throw new Error('Faltam informações')
     }
 
-    const student = await this.studentsRepository.findUniqueByEmail({
+    const studentRequisition = await this.studentsRepository.findUniqueByEmail({
       email,
     })
 
-    if (!student) {
+    if (!studentRequisition) {
       throw new Error('Email ou Senha Incorretos')
     }
 
-    const passwordsMatch = await compare(password, student.password)
+    const passwordsMatch = await compare(password, studentRequisition.password)
 
     if (!passwordsMatch) {
-      throw new Error('Email ou Senha Incorretos')
+      throw new Error('Senha Incorreta')
     }
 
-    const token = sign(
-      {
-        ra: student.ra,
-        first_name: student.first_name,
-        last_name: student.last_name,
-        email: student.email,
-        locker_number: student.locker_number,
-        profile_picture_url: student.profile_picture_url,
-      },
-      process.env.TOKEN_SECRET_KEY,
-      {
-        subject: student.ra,
-        expiresIn: '1d',
-      }
-    )
+    const student = {
+      ra: studentRequisition.ra,
+      first_name: studentRequisition.first_name,
+      last_name: studentRequisition.last_name,
+      email: studentRequisition.email,
+      locker_number: studentRequisition.locker_number,
+      profile_picture_url: studentRequisition.profile_picture_url,
+    }
 
-    return token
+    const token = sign(student, process.env.TOKEN_SECRET_KEY, {
+      subject: studentRequisition.ra,
+      expiresIn: '1d',
+    })
+
+    return { token, student }
   }
 }

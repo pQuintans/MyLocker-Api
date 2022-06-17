@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { MailAdapter, SendMailData } from '../mail-adapter'
+import { MailAdapter, SendContactMailData, SendMailData } from '../mail-adapter'
 
 const transport = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -19,6 +19,19 @@ export class NodemailerMailAdapter implements MailAdapter {
       from: 'Equipe MyLocker <mylocker.contato@gmail.com>',
       to: subjectName + '<' + subject + '>',
       subject: 'Código de verificação',
+      html: body,
+    })
+  }
+
+  async sendContactMail({
+    senderName,
+    senderEmail,
+    body,
+  }: SendContactMailData) {
+    await transport.sendMail({
+      from: `${senderName} <${senderEmail}>`,
+      to: 'Equipe MyLocker <mylocker.contato@gmail.com>',
+      subject: 'Contato via site',
       html: body,
     })
   }
