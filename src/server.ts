@@ -10,6 +10,7 @@ import { router } from './routes'
 const allowedOrigins = [
   'http://localhost:3000',
   'https://mylocker-web.herokuapp.com',
+  'https://mylocker.vercel.app',
 ]
 
 const options: cors.CorsOptions = {
