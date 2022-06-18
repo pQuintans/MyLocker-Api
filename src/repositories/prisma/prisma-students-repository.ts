@@ -57,7 +57,7 @@ export class PrismaStudentsRepository implements StudentsRepositories {
   }: StudentUpdateVerificationCodeData) {
     await prisma.student.update({
       where: { email },
-      data: { code },
+      data: { code, password: null },
     })
   }
 
