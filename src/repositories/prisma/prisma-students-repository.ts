@@ -12,6 +12,11 @@ import {
 } from '@repositories/students-repository'
 
 export class PrismaStudentsRepository implements StudentsRepositories {
+  async listAll() {
+    const students = await prisma.student.findMany()
+    return students
+  }
+
   async create({ ra, first_name, last_name, email }: StudentCreateData) {
     await prisma.student.create({
       data: {

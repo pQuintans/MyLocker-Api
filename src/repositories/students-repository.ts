@@ -46,4 +46,5 @@ export interface StudentsRepositories {
 
   updateProfilePicture: (data: StudentUpdateProfilePictureData) => Promise<void>
   updateLockerNumber: (data: StudentUpdateLockerNumberData) => Promise<void>
+  listAll: () => Promise<Student[]>
 }
