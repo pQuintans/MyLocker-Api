@@ -102,9 +102,11 @@ export class PrismaStudentsRepository implements StudentsRepositories {
       },
     })
 
-    await prisma.locker.update({
-      where: { number: student.locker_number },
-      data: { rentedAt: null, isRented: 0 },
-    })
+    if (student.locker_number !== null) {
+      await prisma.locker.update({
+        where: { number: student.locker_number },
+        data: { rentedAt: null, isRented: 0 },
+      })
+    }
   }
 }
