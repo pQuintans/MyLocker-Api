@@ -20,6 +20,10 @@ export class FindStudentByEmailService {
       throw new Error('Nenhum aluno com este E-Mail encontrado')
     }
 
+    if (student.status == 0) {
+      throw new Error('Este aluno está inativado')
+    }
+
     return student
   }
 }

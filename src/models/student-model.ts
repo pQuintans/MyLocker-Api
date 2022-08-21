@@ -7,4 +7,5 @@ export interface Student {
   code?: string
   locker_number?: number
   profile_picture_url?: string
+  status: number
 }

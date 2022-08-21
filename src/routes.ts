@@ -11,6 +11,7 @@ import { ValidateHttpOnlyJwtTokenStudentController } from '@controllers/student/
 import { VerifyPasswordExistenceStudentController } from '@controllers/student/verify-password-existence-student-controller'
 import { SetStudentLockerNumberController } from '@controllers/student/set-student-locker-number-controller'
 import { ListAllStudentsController } from '@controllers/student/list-all-students-controller'
+import { InactivateStudentController } from '@controllers/student/inactivate-student-controller'
 
 import { CreateFunctionaryController } from '@controllers/functionary/create-functionary-controller'
 import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
@@ -42,6 +43,7 @@ const verifyPasswordExistenceStudentController =
   new VerifyPasswordExistenceStudentController()
 const setStudentLockerNumberController = new SetStudentLockerNumberController()
 const listAllStudentsController = new ListAllStudentsController()
+const inactivateStudentController = new InactivateStudentController()
 
 const createFunctionaryController = new CreateFunctionaryController()
 const findFunctionaryController = new FindFunctionaryController()
@@ -61,6 +63,7 @@ router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
 
 router.post('/students', createStudentController.handle)
+router.post('/students/inactivate', inactivateStudentController.handle)
 router.get('/students/:email', findStudentByEmailController.handle)
 router.get('/students', listAllStudentsController.handle)
 router.put('/students/update-password', updateStudentPasswordController.handle)

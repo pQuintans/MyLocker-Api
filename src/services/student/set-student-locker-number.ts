@@ -22,6 +22,10 @@ export class SetStudentLockerNumber {
       throw new Error('Nenhum aluno com este RA encontrado')
     }
 
+    if (student.status == 0) {
+      throw new Error('Este aluno está inativado')
+    }
+
     student.locker_number = lockerNumber
 
     const studentToken = {

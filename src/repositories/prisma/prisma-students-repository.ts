@@ -1,6 +1,7 @@
 import { prisma } from '../../prisma'
 
 import {
+  InativateStudentData,
   StudentCreateData,
   StudentFindUniqueByEmailData,
   StudentFindUniqueByRaData,
@@ -80,6 +81,30 @@ export class PrismaStudentsRepository implements StudentsRepositories {
     await prisma.student.update({
       where: { ra },
       data: { locker_number: lockerNumber },
+    })
+  }
+
+  async inativateStudent({ ra }: InativateStudentData) {
+    const student = await prisma.student.findUnique({
+      where: {
+        ra,
+      },
+    })
+
+    await prisma.student.update({
+      where: { ra },
+      data: {
+        status: 0,
+        locker_number: null,
+        password: null,
+        profile_picture_url: null,
+        code: null,
+      },
+    })
+
+    await prisma.locker.update({
+      where: { number: student.locker_number },
+      data: { rentedAt: null, isRented: 0 },
     })
   }
 }

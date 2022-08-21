@@ -1,3 +1,4 @@
+import { StudentsRepositories } from '@repositories/students-repository'
 import { verify } from 'jsonwebtoken'
 
 interface ValidateHttpOnlyJwtTokenStudentServiceData {
@@ -5,6 +6,8 @@ interface ValidateHttpOnlyJwtTokenStudentServiceData {
 }
 
 export class ValidateHttpOnlyJwtTokenStudentService {
+  constructor(private studentsRepository: StudentsRepositories) {}
+
   async execute(request: ValidateHttpOnlyJwtTokenStudentServiceData) {
     const { token } = request
 
@@ -20,6 +23,15 @@ export class ValidateHttpOnlyJwtTokenStudentService {
           locker_number,
           profile_picture_url,
         } = student
+
+        const studentRequisition =
+          await this.studentsRepository.findUniqueByEmail({
+            email,
+          })
+
+        if (studentRequisition.status == 0) {
+          throw new Error('Este aluno está inativado')
+        }
 
         return {
           ra,

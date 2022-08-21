@@ -25,6 +25,10 @@ export class SetStudentVerificationCodeService {
       throw new Error('Nenhum aluno com este E-mail encontrado')
     }
 
+    if (student.status == 0) {
+      throw new Error('Este aluno está inativado')
+    }
+
     const randomCode = randomstring.generate(6)
 
     await this.studentsRepository.updateVerificationCode({

@@ -25,6 +25,10 @@ export class AuthenticateStudentService {
       throw new Error('Email ou Senha Incorretos')
     }
 
+    if (studentRequisition.status == 0) {
+      throw new Error('Este aluno está inativado')
+    }
+
     const passwordsMatch = await compare(password, studentRequisition.password)
 
     if (!passwordsMatch) {

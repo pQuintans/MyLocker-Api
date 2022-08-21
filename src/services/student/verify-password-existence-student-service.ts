@@ -22,6 +22,10 @@ export class VerifyPasswordExistenceStudentService {
       throw new Error('Email Incorreto')
     }
 
+    if (student.status == 0) {
+      throw new Error('Este aluno está inativado')
+    }
+
     const hasPassword = student.password == null ? false : true
 
     return hasPassword

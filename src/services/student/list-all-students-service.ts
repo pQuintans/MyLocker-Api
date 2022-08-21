@@ -1,5 +1,4 @@
-import { StudentsRepositories } from "@repositories/students-repository"
-
+import { StudentsRepositories } from '@repositories/students-repository'
 
 export class ListAllStudentsService {
   constructor(private studentsRepository: StudentsRepositories) {}
