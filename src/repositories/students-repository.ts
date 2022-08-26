@@ -36,7 +36,7 @@ export interface InativateStudentData {
 
 export interface StudentUpdateLockerNumberData {
   ra: string
-  lockerNumber: number
+  lockerNumber: number | null
 }
 
 export interface StudentsRepositories {

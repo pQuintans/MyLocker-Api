@@ -26,6 +26,7 @@ import { CreateSectionController } from '@controllers/section/create-section-con
 import { CreateApmController } from '@controllers/apm/create-apm-controller'
 
 import { HandleEmailContactController } from '@controllers/handle-email-contact-controller'
+import { ClearStudentLockerController } from '@controllers/clear-student-locker-controller'
 
 export const router = express.Router()
 
@@ -58,6 +59,8 @@ const createSectionController = new CreateSectionController()
 const createApmController = new CreateApmController()
 
 const handleEmailContactController = new HandleEmailContactController()
+
+const clearStudentLockerController = new ClearStudentLockerController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
@@ -103,3 +106,5 @@ router.post('/apms', createApmController.handle)
 router.post('/sections', createSectionController.handle)
 
 router.post('/contact', handleEmailContactController.handle)
+
+router.post('/clear-locker-demonstration', clearStudentLockerController.handle)
