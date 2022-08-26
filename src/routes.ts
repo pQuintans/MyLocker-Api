@@ -89,7 +89,16 @@ router.post(
 )
 router.post('/students/session', authenticateStudentController.handle)
 router.get('/logout/students', (req, res) => {
-  res.status(202).clearCookie('token').send()
+  res
+    .status(202)
+    .cookie('token', '', {
+      sameSite: 'none',
+      secure: req.headers.host == 'localhost:3000' ? false : true,
+      path: '/',
+      expires: new Date(new Date().getTime() - 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    })
+    .send()
 })
 router.get(
   '/validate/students',
