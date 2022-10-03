@@ -13,6 +13,11 @@ export class PrismaLockersRepository implements LockersRepositories {
         section: true,
         student: true,
       },
+      // select: {
+      //   student: {
+      //     wherer:
+      //   }
+      // }
     })
     return lockers
   }

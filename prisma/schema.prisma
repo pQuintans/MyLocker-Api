@@ -41,7 +41,7 @@ model locker {
   status        Int     @default(1) @db.TinyInt
 
   section section   @relation(fields: [FK_section_id], references: [id], onDelete: Cascade, map: "FKSectionIdLocker")
-  student student[]
+  student student?
 
   @@index([FK_section_id], map: "FKSectionIdLocker")
 }
@@ -62,7 +62,7 @@ model student {
   email               String  @unique @db.VarChar(50)
   password            String?
   code                String? @db.VarChar(6)
-  locker_number       Int?
+  locker_number       Int? @unique
   status              Int     @default(1) @db.TinyInt
   profile_picture_url String? @db.VarChar(255)
 
