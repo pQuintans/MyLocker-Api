@@ -11,6 +11,7 @@ export class PrismaLockersRepository implements LockersRepositories {
     const lockers = await prisma.locker.findMany({
       include: {
         section: true,
+        student: true,
       },
     })
     return lockers
