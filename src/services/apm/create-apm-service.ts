@@ -1,25 +1,23 @@
 import { ApmsRepositories } from '@repositories/apms-repository'
 
 interface CreateApmServiceRequest {
-  isPaid?: number
   student_ra: string
-  functionary_cpf: string
+  requisitionPDF: string
 }
 
 export class CreateApmService {
   constructor(private apmsRepository: ApmsRepositories) {}
 
   async execute(request: CreateApmServiceRequest) {
-    const { isPaid = 0, student_ra, functionary_cpf } = request
+    const { student_ra, requisitionPDF } = request
 
-    if (!student_ra || !functionary_cpf) {
+    if (!student_ra || !requisitionPDF) {
       throw new Error('Faltam informações')
     }
 
     await this.apmsRepository.create({
-      isPaid,
       FK_student_ra: student_ra,
-      FK_functionary_cpf: functionary_cpf,
+      requisitionPDF,
     })
 
     return

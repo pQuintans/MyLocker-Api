@@ -1,7 +1,7 @@
 import multer from 'multer'
 import path from 'path'
 
-const storage = multer.diskStorage({
+const storageImage = multer.diskStorage({
   destination: './upload/images',
   filename: (req, file, cb) => {
     return cb(
@@ -11,6 +11,20 @@ const storage = multer.diskStorage({
   },
 })
 
-export const upload = multer({
-  storage: storage,
+export const uploadImage = multer({
+  storage: storageImage,
+})
+
+const storagePDF = multer.diskStorage({
+  destination: './upload/pdf',
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
+    )
+  },
+})
+
+export const uploadPDF = multer({
+  storage: storagePDF,
 })

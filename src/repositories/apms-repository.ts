@@ -1,7 +1,6 @@
 export interface ApmsCreateData {
-  isPaid: number
   FK_student_ra: string
-  FK_functionary_cpf: string
+  requisitionPDF: string
 }
 
 export interface ApmsRepositories {

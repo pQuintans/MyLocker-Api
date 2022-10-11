@@ -24,6 +24,7 @@ app.use(express.json())
 app.use(cors(options))
 app.use(cookieParser())
 app.use('/profile-picture', express.static('upload/images'))
+app.use('/apm-requisition-pdf', express.static('upload/pdf'))
 app.use(router)
 
 app.use(handleErrorsMiddleware)

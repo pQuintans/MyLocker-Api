@@ -1,4 +1,4 @@
-import { upload } from './multer'
+import { uploadImage, uploadPDF } from './multer'
 import express from 'express'
 
 import { CreateStudentController } from '@controllers/student/create-student-controller'
@@ -79,8 +79,8 @@ router.post(
   verifyPasswordExistenceStudentController.handle
 )
 router.post(
-  '/upload',
-  upload.single('profile'),
+  '/uploadImage',
+  uploadImage.single('profile'),
   setStudentProfilePictureController.handle
 )
 router.post(
@@ -110,7 +110,11 @@ router.get('/lockers', listAllLockersController.handle)
 router.get('/lockers/:lockerNumberString', findLockerByNumberController.handle)
 router.post('/lockers/set-is-rented', setLockerIsRentedController.handle)
 
-router.post('/apms', createApmController.handle)
+router.post(
+  '/apms',
+  uploadPDF.single('apmRequisitionPDF'),
+  createApmController.handle
+)
 
 router.post('/sections', createSectionController.handle)
 
