@@ -22,6 +22,7 @@ export class ValidateHttpOnlyJwtTokenStudentService {
           email,
           locker_number,
           profile_picture_url,
+          apm_id,
         } = student
 
         const studentRequisition =
@@ -40,6 +41,7 @@ export class ValidateHttpOnlyJwtTokenStudentService {
           email,
           locker_number,
           profile_picture_url,
+          apm_id,
         }
       }
     } else {

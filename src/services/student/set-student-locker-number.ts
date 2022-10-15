@@ -35,6 +35,7 @@ export class SetStudentLockerNumber {
       email: student.email,
       locker_number: lockerNumber,
       profile_picture_url: student.profile_picture_url,
+      apm_id: student.FK_apm_id,
     }
 
     const token = sign(studentToken, process.env.TOKEN_SECRET_KEY, {
@@ -44,6 +45,6 @@ export class SetStudentLockerNumber {
 
     await this.studentsRepository.updateLockerNumber({ ra, lockerNumber })
 
-    return { student, token }
+    return { student: studentToken, token }
   }
 }

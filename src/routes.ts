@@ -27,6 +27,7 @@ import { CreateApmController } from '@controllers/apm/create-apm-controller'
 
 import { HandleEmailContactController } from '@controllers/handle-email-contact-controller'
 import { ClearStudentLockerController } from '@controllers/clear-student-locker-controller'
+import { FindApmByIdController } from '@controllers/apm/find-apm-by-id-controller'
 
 export const router = express.Router()
 
@@ -57,6 +58,7 @@ const setLockerIsRentedController = new SetLockerIsRentedController()
 const createSectionController = new CreateSectionController()
 
 const createApmController = new CreateApmController()
+const findApmByIdController = new FindApmByIdController()
 
 const handleEmailContactController = new HandleEmailContactController()
 
@@ -110,6 +112,7 @@ router.get('/lockers', listAllLockersController.handle)
 router.get('/lockers/:lockerNumberString', findLockerByNumberController.handle)
 router.post('/lockers/set-is-rented', setLockerIsRentedController.handle)
 
+router.get('/apms/:id', findApmByIdController.handle)
 router.post(
   '/apms',
   uploadPDF.single('apmRequisitionPDF'),

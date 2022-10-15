@@ -42,6 +42,7 @@ export class AuthenticateStudentService {
       email: studentRequisition.email,
       locker_number: studentRequisition.locker_number,
       profile_picture_url: studentRequisition.profile_picture_url,
+      apm_id: studentRequisition.FK_apm_id,
     }
 
     const token = sign(student, process.env.TOKEN_SECRET_KEY, {

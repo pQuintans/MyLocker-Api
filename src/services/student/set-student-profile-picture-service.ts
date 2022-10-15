@@ -35,6 +35,7 @@ export class SetStudentProfilePictureService {
       email: student.email,
       locker_number: student.locker_number,
       profile_picture_url: url,
+      apm_id: student.FK_apm_id,
     }
 
     const token = sign(studentToken, process.env.TOKEN_SECRET_KEY, {
@@ -44,6 +45,6 @@ export class SetStudentProfilePictureService {
 
     await this.studentsRepository.updateProfilePicture({ ra, url })
 
-    return { student, token }
+    return { student: studentToken, token }
   }
 }
