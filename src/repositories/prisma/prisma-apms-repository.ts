@@ -33,4 +33,13 @@ export class PrismaApmsRepository implements ApmsRepositories {
 
     return apm
   }
+
+  async listAll() {
+    const apm = await prisma.apm.findMany({
+      include: {
+        student: true,
+      },
+    })
+    return apm
+  }
 }

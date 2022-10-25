@@ -15,7 +15,7 @@ model apm {
   FK_functionary_cpf String? @db.VarChar(12)
 
   functionary functionary? @relation(fields: [FK_functionary_cpf], references: [cpf], onDelete: Cascade, map: "FKFunctionaryCpfApm")
-  student     student[]
+  student     student?
 
   @@index([FK_functionary_cpf], map: "FKFunctionaryCpfApm")
 }
@@ -28,7 +28,9 @@ model functionary {
   password            String
   status              Int     @default(1) @db.TinyInt
   profile_picture_url String?
-  apm                 apm[]
+  code                String? @db.VarChar(6)
+
+  apm apm[]
 }
 
 model locker {

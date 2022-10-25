@@ -24,7 +24,7 @@
       "@entities/*": ["./src/entities/*"],
       "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"],
-      "@repositories/*": ["./src/repositories/*"],
+      "@repositories/*": ["src/repositories/*"],
       "@adapters/*": ["./src/adapters/*"]
     }
   },

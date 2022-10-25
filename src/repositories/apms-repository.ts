@@ -12,4 +12,5 @@ export interface ApmsFindUniqueByIdData {
 export interface ApmsRepositories {
   create: (data: ApmsCreateData) => Promise<void>
   findUniqueById: (data: ApmsFindUniqueByIdData) => Promise<apm>
+  listAll: () => Promise<apm[]>
 }
