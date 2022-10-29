@@ -3,6 +3,8 @@ import {
   FunctionaryCreateData,
   FunctionaryFindUniqueByCpfData,
   FunctionaryFindUniqueByEmailData,
+  FunctionarySetVerificationCodeData,
+  FunctionaryUpdatePasswordData,
 } from '@repositories/functionaries-repository'
 import { prisma } from '../../prisma'
 
@@ -46,5 +48,30 @@ export class PrismaFunctionariesRepository
     })
 
     return functionary
+  }
+
+  async updateVerificationCode({
+    cpf,
+    code,
+  }: FunctionarySetVerificationCodeData) {
+    await prisma.functionary.update({
+      where: {
+        cpf,
+      },
+      data: {
+        code,
+      },
+    })
+  }
+
+  async updatePassword({ cpf, password }: FunctionaryUpdatePasswordData) {
+    await prisma.functionary.update({
+      where: {
+        cpf,
+      },
+      data: {
+        password,
+      },
+    })
   }
 }

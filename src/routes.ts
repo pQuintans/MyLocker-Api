@@ -29,6 +29,8 @@ import { HandleEmailContactController } from '@controllers/handle-email-contact-
 import { ClearStudentLockerController } from '@controllers/clear-student-locker-controller'
 import { FindApmByIdController } from '@controllers/apm/find-apm-by-id-controller'
 import { ListApmsController } from '@controllers/apm/list-apm-controller'
+import { SetFunctionaryVerificationCodeController } from '@controllers/functionary/set-functionary-verification-code-controller'
+import { UpdateFunctionaryPasswordController } from '@controllers/functionary/update-functionary-password-controller'
 
 export const router = express.Router()
 
@@ -50,6 +52,10 @@ const inactivateStudentController = new InactivateStudentController()
 
 const createFunctionaryController = new CreateFunctionaryController()
 const findFunctionaryController = new FindFunctionaryController()
+const setFunctionaryVerificationCodeController =
+  new SetFunctionaryVerificationCodeController()
+const updateFunctionaryPasswordController =
+  new UpdateFunctionaryPasswordController()
 
 const createLockerController = new CreateLockerController()
 const listAllLockersController = new ListAllLockersController()
@@ -68,6 +74,14 @@ const clearStudentLockerController = new ClearStudentLockerController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
+router.put(
+  '/functionaries/generate-code',
+  setFunctionaryVerificationCodeController.handle
+)
+router.put(
+  '/functionaries/update-password',
+  updateFunctionaryPasswordController.handle
+)
 
 router.post('/students', createStudentController.handle)
 router.post('/students/inactivate', inactivateStudentController.handle)
