@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 
 export class UpdateFunctionaryPasswordController {
   async handle(req: Request, res: Response) {
-    const { cpf, password, oldPassword } = req.body
+    const { cpf, password, oldPassword, forgotPassword } = req.body
 
     const prismaFunctionaryRepository = new PrismaFunctionariesRepository()
     const updateFunctionaryPasswordService =
@@ -14,6 +14,7 @@ export class UpdateFunctionaryPasswordController {
       cpf,
       password,
       oldPassword,
+      forgotPassword,
     })
 
     return res.status(204).json({ message: 'Senha atualizada com sucesso' })

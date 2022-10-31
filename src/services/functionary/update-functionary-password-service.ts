@@ -5,15 +5,16 @@ interface UpdateFunctionaryPasswordServiceData {
   cpf: string
   password: string
   oldPassword: string
+  forgotPassword: boolean
 }
 
 export class UpdateFunctionaryPasswordService {
   constructor(private functionariesRepositories: FunctionariesRepositories) {}
 
   async execute(request: UpdateFunctionaryPasswordServiceData) {
-    const { cpf, password, oldPassword } = request
+    const { cpf, password, oldPassword, forgotPassword } = request
 
-    if (!cpf || !password || !oldPassword) {
+    if (!cpf || !password) {
       throw new Error('Faltam informações')
     }
 
@@ -21,10 +22,16 @@ export class UpdateFunctionaryPasswordService {
       cpf,
     })
 
-    const passwordsMatches = await compare(oldPassword, functionary.password)
+    if (forgotPassword == false) {
+      if (!oldPassword) {
+        throw new Error('Faltam informações')
+      }
 
-    if (!passwordsMatches) {
-      throw new Error('Senha antiga incorreta!')
+      const passwordsMatches = await compare(oldPassword, functionary.password)
+
+      if (!passwordsMatches) {
+        throw new Error('Senha antiga incorreta!')
+      }
     }
 
     const regex = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/)
