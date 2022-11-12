@@ -34,11 +34,6 @@ export class VerifyFunctionaryVerificationCodeService {
       throw new Error('Código de verificação incorreto')
     }
 
-    await this.functionaryRepository.updateVerificationCode({
-      cpf,
-      code: null,
-    })
-
     return
   }
 }

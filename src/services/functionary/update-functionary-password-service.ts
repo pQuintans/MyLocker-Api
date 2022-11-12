@@ -51,6 +51,11 @@ export class UpdateFunctionaryPasswordService {
       password: hashPassword,
     })
 
+    await this.functionariesRepositories.updateVerificationCode({
+      cpf,
+      code: null,
+    })
+
     return
   }
 }
