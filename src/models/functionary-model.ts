@@ -6,4 +6,5 @@ export interface Functionary {
   password: string
   status: number
   profile_picture_url?: string
+  code?: string
 }

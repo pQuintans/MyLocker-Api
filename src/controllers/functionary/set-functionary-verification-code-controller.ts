@@ -16,10 +16,10 @@ export class SetFunctionaryVerificationCodeController {
         nodemailerMailAdapter
       )
 
-    const randomCode = await setFunctionaryVerificationCodeService.execute({
+    await setFunctionaryVerificationCodeService.execute({
       cpf,
     })
 
-    return res.status(200).json({ randomCode: randomCode })
+    return res.status(200).send()
   }
 }

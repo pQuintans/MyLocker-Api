@@ -31,6 +31,7 @@ import { FindApmByIdController } from '@controllers/apm/find-apm-by-id-controlle
 import { ListApmsController } from '@controllers/apm/list-apm-controller'
 import { SetFunctionaryVerificationCodeController } from '@controllers/functionary/set-functionary-verification-code-controller'
 import { UpdateFunctionaryPasswordController } from '@controllers/functionary/update-functionary-password-controller'
+import { VerifyFunctionaryVerificationCodeController } from '@controllers/functionary/verify-functionary-verification-code-controller'
 
 export const router = express.Router()
 
@@ -56,6 +57,8 @@ const setFunctionaryVerificationCodeController =
   new SetFunctionaryVerificationCodeController()
 const updateFunctionaryPasswordController =
   new UpdateFunctionaryPasswordController()
+const verifyFunctionaryVerificationCodeController =
+  new VerifyFunctionaryVerificationCodeController()
 
 const createLockerController = new CreateLockerController()
 const listAllLockersController = new ListAllLockersController()
@@ -74,6 +77,10 @@ const clearStudentLockerController = new ClearStudentLockerController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
+router.get(
+  '/functionaries/:cpf/verify-code/:typedCode',
+  verifyFunctionaryVerificationCodeController.handle
+)
 router.put(
   '/functionaries/generate-code',
   setFunctionaryVerificationCodeController.handle

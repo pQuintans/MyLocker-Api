@@ -51,6 +51,6 @@ export class SetFunctionaryVerificationCodeService {
       ].join('\n'),
     })
 
-    return randomCode
+    return
   }
 }
