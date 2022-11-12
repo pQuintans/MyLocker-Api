@@ -2,6 +2,7 @@ import {
   ApmsCreateData,
   ApmsFindUniqueByIdData,
   ApmsRepositories,
+  ApmsUpdateStatusData,
 } from '@repositories/apms-repository'
 import { prisma } from '../../prisma'
 
@@ -41,5 +42,16 @@ export class PrismaApmsRepository implements ApmsRepositories {
       },
     })
     return apm
+  }
+
+  async updateApmStatus({ id, status }: ApmsUpdateStatusData) {
+    await prisma.apm.update({
+      where: {
+        id,
+      },
+      data: {
+        status,
+      },
+    })
   }
 }

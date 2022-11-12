@@ -3,5 +3,5 @@ export interface Apm {
   requisitionPDF: string
   FK_student_ra?: string
   FK_functionary_cpf?: string
-  status: number
+  status: 0 | 1 | 2
 }

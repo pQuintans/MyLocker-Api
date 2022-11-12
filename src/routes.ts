@@ -32,6 +32,7 @@ import { ListApmsController } from '@controllers/apm/list-apm-controller'
 import { SetFunctionaryVerificationCodeController } from '@controllers/functionary/set-functionary-verification-code-controller'
 import { UpdateFunctionaryPasswordController } from '@controllers/functionary/update-functionary-password-controller'
 import { VerifyFunctionaryVerificationCodeController } from '@controllers/functionary/verify-functionary-verification-code-controller'
+import { ChangeApmStatusController } from '@controllers/apm/change-apm-status-controller'
 
 export const router = express.Router()
 
@@ -70,6 +71,7 @@ const createSectionController = new CreateSectionController()
 const createApmController = new CreateApmController()
 const findApmByIdController = new FindApmByIdController()
 const listApmsController = new ListApmsController()
+const changeApmStatusController = new ChangeApmStatusController()
 
 const handleEmailContactController = new HandleEmailContactController()
 
@@ -137,6 +139,7 @@ router.post('/lockers/set-is-rented', setLockerIsRentedController.handle)
 
 router.get('/apms', listApmsController.handle)
 router.get('/apms/:id', findApmByIdController.handle)
+router.put('/apms/change-status', changeApmStatusController.handle)
 router.post(
   '/apms',
   uploadPDF.single('apmRequisitionPDF'),
