@@ -1,15 +1,20 @@
 import { ApmsRepositories } from '@repositories/apms-repository'
+import { FunctionariesRepositories } from '@repositories/functionaries-repository'
 
 interface ChangeApmStatusServiceData {
   id: number
   status: number
+  functionaryCpf: string
 }
 
 export class ChangeApmStatusService {
-  constructor(private apmRepositories: ApmsRepositories) {}
+  constructor(
+    private apmRepositories: ApmsRepositories,
+    private functionariesRepositories: FunctionariesRepositories
+  ) {}
 
-  async execute({ id, status }: ChangeApmStatusServiceData) {
-    if (!id || !status) {
+  async execute({ id, status, functionaryCpf }: ChangeApmStatusServiceData) {
+    if (!id || !status || !functionaryCpf) {
       throw new Error('Faltam informações')
     }
 
@@ -23,7 +28,15 @@ export class ChangeApmStatusService {
       throw new Error('ID inválido')
     }
 
-    await this.apmRepositories.updateApmStatus({ id, status })
+    const functionary = await this.functionariesRepositories.findUniqueByCpf({
+      cpf: functionaryCpf,
+    })
+
+    if (!functionary) {
+      throw new Error('CPF inválido')
+    }
+
+    await this.apmRepositories.updateApmStatus({ id, status, functionaryCpf })
 
     return
   }

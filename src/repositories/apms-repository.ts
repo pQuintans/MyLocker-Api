@@ -11,7 +11,8 @@ export interface ApmsFindUniqueByIdData {
 
 export interface ApmsUpdateStatusData {
   id: number
-  status: number
+  status: 0 | 1 | 2
+  functionaryCpf: string
 }
 
 export interface ApmsRepositories {

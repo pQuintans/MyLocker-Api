@@ -44,13 +44,18 @@ export class PrismaApmsRepository implements ApmsRepositories {
     return apm
   }
 
-  async updateApmStatus({ id, status }: ApmsUpdateStatusData) {
+  async updateApmStatus({ id, status, functionaryCpf }: ApmsUpdateStatusData) {
     await prisma.apm.update({
       where: {
         id,
       },
       data: {
         status,
+        functionary: {
+          connect: {
+            cpf: functionaryCpf,
+          },
+        },
       },
     })
   }
