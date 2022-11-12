@@ -6,6 +6,7 @@ import {
   StudentFindUniqueByEmailData,
   StudentFindUniqueByRaData,
   StudentsRepositories,
+  StudentupdateInformationData,
   StudentUpdateLockerNumberData,
   StudentUpdatePasswordData,
   StudentUpdateProfilePictureData,
@@ -108,5 +109,24 @@ export class PrismaStudentsRepository implements StudentsRepositories {
         data: { rentedAt: null, isRented: 0 },
       })
     }
+  }
+
+  async updateInformation({
+    ra,
+    email,
+    first_name,
+    last_name,
+  }: StudentupdateInformationData) {
+    await prisma.student.update({
+      where: {
+        ra,
+      },
+      data: {
+        email,
+        first_name,
+        last_name,
+      },
+    })
+    return
   }
 }

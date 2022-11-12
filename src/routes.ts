@@ -33,12 +33,15 @@ import { SetFunctionaryVerificationCodeController } from '@controllers/functiona
 import { UpdateFunctionaryPasswordController } from '@controllers/functionary/update-functionary-password-controller'
 import { VerifyFunctionaryVerificationCodeController } from '@controllers/functionary/verify-functionary-verification-code-controller'
 import { ChangeApmStatusController } from '@controllers/apm/change-apm-status-controller'
+import { UpdateStudentInformationController } from '@controllers/student/update-student-information-controller'
 
 export const router = express.Router()
 
 const createStudentController = new CreateStudentController()
 const findStudentByEmailController = new FindStudentByEmailController()
 const updateStudentPasswordController = new UpdateStudentPasswordController()
+const updateStudentInformationController =
+  new UpdateStudentInformationController()
 const setStudentVerificationCodeController =
   new SetStudentVerificationCodeController()
 const setStudentProfilePictureController =
@@ -97,6 +100,10 @@ router.post('/students/inactivate', inactivateStudentController.handle)
 router.get('/students/:email', findStudentByEmailController.handle)
 router.get('/students', listAllStudentsController.handle)
 router.put('/students/update-password', updateStudentPasswordController.handle)
+router.put(
+  '/students/update-informations',
+  updateStudentInformationController.handle
+)
 router.put(
   '/students/generate-code',
   setStudentVerificationCodeController.handle

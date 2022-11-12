@@ -40,6 +40,13 @@ export interface StudentUpdateLockerNumberData {
   lockerNumber: number | null
 }
 
+export interface StudentupdateInformationData {
+  ra: string
+  email: string
+  first_name: string
+  last_name: string
+}
+
 export interface StudentsRepositories {
   create: (data: StudentCreateData) => Promise<void>
   findUniqueByRa: (data: StudentFindUniqueByRaData) => Promise<student>
@@ -51,6 +58,7 @@ export interface StudentsRepositories {
 
   updateProfilePicture: (data: StudentUpdateProfilePictureData) => Promise<void>
   updateLockerNumber: (data: StudentUpdateLockerNumberData) => Promise<void>
+  updateInformation: (data: StudentupdateInformationData) => Promise<void>
   inativateStudent: (data: InativateStudentData) => Promise<void>
   listAll: () => Promise<Student[]>
 }
