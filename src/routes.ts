@@ -12,6 +12,8 @@ import { VerifyPasswordExistenceStudentController } from '@controllers/student/v
 import { SetStudentLockerNumberController } from '@controllers/student/set-student-locker-number-controller'
 import { ListAllStudentsController } from '@controllers/student/list-all-students-controller'
 import { UpdateStudentStatusController } from '@controllers/student/update-student-status-controller'
+import { UpdateStudentInformationController } from '@controllers/student/update-student-information-controller'
+import { FindStudentByRaController } from '@controllers/student/find-student-by-ra-controller'
 
 import { CreateFunctionaryController } from '@controllers/functionary/create-functionary-controller'
 import { FindFunctionaryController } from '@controllers/functionary/find-functionary-controller'
@@ -33,12 +35,12 @@ import { SetFunctionaryVerificationCodeController } from '@controllers/functiona
 import { UpdateFunctionaryPasswordController } from '@controllers/functionary/update-functionary-password-controller'
 import { VerifyFunctionaryVerificationCodeController } from '@controllers/functionary/verify-functionary-verification-code-controller'
 import { ChangeApmStatusController } from '@controllers/apm/change-apm-status-controller'
-import { UpdateStudentInformationController } from '@controllers/student/update-student-information-controller'
 
 export const router = express.Router()
 
 const createStudentController = new CreateStudentController()
 const findStudentByEmailController = new FindStudentByEmailController()
+const findStudentByRaController = new FindStudentByRaController()
 const updateStudentPasswordController = new UpdateStudentPasswordController()
 const updateStudentInformationController =
   new UpdateStudentInformationController()
@@ -98,6 +100,7 @@ router.put(
 router.post('/students', createStudentController.handle)
 router.post('/students/update-status', updateStudentStatusController.handle)
 router.get('/students/:email', findStudentByEmailController.handle)
+router.get('/students/:ra', findStudentByRaController.handle)
 router.get('/students', listAllStudentsController.handle)
 router.put('/students/update-password', updateStudentPasswordController.handle)
 router.put(
