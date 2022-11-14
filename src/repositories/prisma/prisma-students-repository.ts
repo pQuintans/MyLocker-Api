@@ -94,6 +94,10 @@ export class PrismaStudentsRepository implements StudentsRepositories {
         profile_picture_url: null,
         code: null,
         locker: {
+          update: {
+            rentedAt: null,
+            isRented: 0,
+          },
           disconnect: true,
         },
       },
