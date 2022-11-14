@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 
 export class UpdateStudentInformationController {
   async handle(req: Request, res: Response) {
-    const { ra, email, firstName, lastName } = req.body
+    const { ra, email, first_name, last_name } = req.body
 
     const prismaStudentsRepository = new PrismaStudentsRepository()
     const updateStudentInformationService = new UpdateStudentInformationService(
@@ -14,8 +14,8 @@ export class UpdateStudentInformationController {
     await updateStudentInformationService.execute({
       ra,
       email,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
     })
 
     return res.status(204).send()
