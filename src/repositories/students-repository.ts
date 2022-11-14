@@ -31,8 +31,9 @@ export interface StudentUpdateProfilePictureData {
   url: string
 }
 
-export interface InativateStudentData {
+export interface StudentUpdateStatusData {
   ra: string
+  status: 0 | 1
 }
 
 export interface StudentUpdateLockerNumberData {
@@ -59,6 +60,6 @@ export interface StudentsRepositories {
   updateProfilePicture: (data: StudentUpdateProfilePictureData) => Promise<void>
   updateLockerNumber: (data: StudentUpdateLockerNumberData) => Promise<void>
   updateInformation: (data: StudentupdateInformationData) => Promise<void>
-  inativateStudent: (data: InativateStudentData) => Promise<void>
+  updateStatus: (data: StudentUpdateStatusData) => Promise<void>
   listAll: () => Promise<Student[]>
 }

@@ -1,17 +1,17 @@
 import { PrismaStudentsRepository } from '@repositories/prisma/prisma-students-repository'
-import { InactivateStudentService } from '@services/student/inactivate-student-service'
+import { UpdateStudentStatusService } from '@services/student/update-student-status-status'
 import { Request, Response } from 'express'
 
-export class InactivateStudentController {
+export class UpdateStudentStatusController {
   async handle(req: Request, res: Response) {
     const { ra } = req.body
 
     const prismaStudentRepository = new PrismaStudentsRepository()
-    const inativateStudentService = new InactivateStudentService(
+    const updateStudentStatusService = new UpdateStudentStatusService(
       prismaStudentRepository
     )
 
-    await inativateStudentService.execute({
+    await updateStudentStatusService.execute({
       ra,
     })
 

@@ -1,7 +1,6 @@
 import { prisma } from '../../prisma'
 
 import {
-  InativateStudentData,
   StudentCreateData,
   StudentFindUniqueByEmailData,
   StudentFindUniqueByRaData,
@@ -10,6 +9,7 @@ import {
   StudentUpdateLockerNumberData,
   StudentUpdatePasswordData,
   StudentUpdateProfilePictureData,
+  StudentUpdateStatusData,
   StudentUpdateVerificationCodeData,
 } from '@repositories/students-repository'
 
@@ -85,30 +85,22 @@ export class PrismaStudentsRepository implements StudentsRepositories {
     })
   }
 
-  async inativateStudent({ ra }: InativateStudentData) {
-    const student = await prisma.student.findUnique({
-      where: {
-        ra,
-      },
-    })
-
+  async updateStatus({ ra, status }: StudentUpdateStatusData) {
     await prisma.student.update({
       where: { ra },
       data: {
-        status: 0,
-        locker_number: null,
+        status,
         password: null,
         profile_picture_url: null,
         code: null,
+        locker: {
+          disconnect: true,
+        },
+      },
+      include: {
+        locker: true,
       },
     })
-
-    if (student.locker_number !== null) {
-      await prisma.locker.update({
-        where: { number: student.locker_number },
-        data: { rentedAt: null, isRented: 0 },
-      })
-    }
   }
 
   async updateInformation({

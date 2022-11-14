@@ -1,13 +1,13 @@
 import { StudentsRepositories } from '@repositories/students-repository'
 
-interface ChangeStudentStatusServiceData {
+interface UpdateStudentStatusServiceData {
   ra: string
 }
 
-export class InactivateStudentService {
+export class UpdateStudentStatusService {
   constructor(private studentsRepository: StudentsRepositories) {}
 
-  async execute(request: ChangeStudentStatusServiceData) {
+  async execute(request: UpdateStudentStatusServiceData) {
     const { ra } = request
 
     if (!ra) {
@@ -20,7 +20,10 @@ export class InactivateStudentService {
       throw new Error('Nenhum aluno com este ra encontrado')
     }
 
-    await this.studentsRepository.inativateStudent({ ra })
+    await this.studentsRepository.updateStatus({
+      ra,
+      status: student.status == 0 ? 1 : 0,
+    })
 
     return
   }
