@@ -86,25 +86,43 @@ export class PrismaStudentsRepository implements StudentsRepositories {
   }
 
   async updateStatus({ ra, status }: StudentUpdateStatusData) {
-    await prisma.student.update({
-      where: { ra },
-      data: {
-        status,
-        password: null,
-        profile_picture_url: null,
-        code: null,
-        locker: {
-          update: {
-            rentedAt: null,
-            isRented: 0,
-          },
-          disconnect: true,
-        },
-      },
-      include: {
-        locker: true,
+    const student = await prisma.student.findUnique({
+      where: {
+        ra,
       },
     })
+
+    if (student.locker_number != null) {
+      await prisma.student.update({
+        where: { ra },
+        data: {
+          status,
+          password: null,
+          profile_picture_url: null,
+          code: null,
+          locker: {
+            update: {
+              rentedAt: null,
+              isRented: 0,
+            },
+            disconnect: true,
+          },
+        },
+        include: {
+          locker: true,
+        },
+      })
+    } else {
+      await prisma.student.update({
+        where: { ra },
+        data: {
+          status,
+          password: null,
+          profile_picture_url: null,
+          code: null,
+        },
+      })
+    }
   }
 
   async updateInformation({
