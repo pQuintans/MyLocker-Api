@@ -100,7 +100,7 @@ router.put(
 router.post('/students', createStudentController.handle)
 router.post('/students/update-status', updateStudentStatusController.handle)
 router.get('/students/:email', findStudentByEmailController.handle)
-router.get('/students/:ra', findStudentByRaController.handle)
+router.get('/students/ra/:ra', findStudentByRaController.handle)
 router.get('/students', listAllStudentsController.handle)
 router.put('/students/update-password', updateStudentPasswordController.handle)
 router.put(
