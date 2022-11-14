@@ -14,7 +14,7 @@ export class ChangeApmStatusService {
   ) {}
 
   async execute({ id, status, functionaryCpf }: ChangeApmStatusServiceData) {
-    if (!id || !status || !functionaryCpf) {
+    if (id == null || status == null || functionaryCpf == null) {
       throw new Error('Faltam informações')
     }
 
