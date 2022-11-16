@@ -1,4 +1,3 @@
-import { Student } from '@models/student-model'
 import { student } from '@prisma/client'
 
 export interface StudentCreateData {
@@ -50,8 +49,28 @@ export interface StudentupdateInformationData {
 
 export interface StudentsRepositories {
   create: (data: StudentCreateData) => Promise<void>
-  findUniqueByRa: (data: StudentFindUniqueByRaData) => Promise<student>
-  findUniqueByEmail: (data: StudentFindUniqueByEmailData) => Promise<student>
+  findUniqueByRa: (data: StudentFindUniqueByRaData) => Promise<
+    student & {
+      _count: {
+        apm: number
+      }
+      apm: {
+        id: number
+        status: number
+      }[]
+    }
+  >
+  findUniqueByEmail: (data: StudentFindUniqueByEmailData) => Promise<
+    student & {
+      _count: {
+        apm: number
+      }
+      apm: {
+        id: number
+        status: number
+      }[]
+    }
+  >
   updatePassword: (data: StudentUpdatePasswordData) => Promise<void>
   updateVerificationCode: (
     data: StudentUpdateVerificationCodeData
@@ -61,5 +80,5 @@ export interface StudentsRepositories {
   updateLockerNumber: (data: StudentUpdateLockerNumberData) => Promise<void>
   updateInformation: (data: StudentupdateInformationData) => Promise<void>
   updateStatus: (data: StudentUpdateStatusData) => Promise<void>
-  listAll: () => Promise<Student[]>
+  listAll: () => Promise<student[]>
 }

@@ -36,6 +36,23 @@ export class PrismaStudentsRepository implements StudentsRepositories {
       where: {
         ra: ra,
       },
+      include: {
+        _count: {
+          select: {
+            apm: true,
+          },
+        },
+        apm: {
+          orderBy: {
+            id: 'desc',
+          },
+          take: 1,
+          select: {
+            id: true,
+            status: true,
+          },
+        },
+      },
     })
 
     return student
@@ -45,6 +62,23 @@ export class PrismaStudentsRepository implements StudentsRepositories {
     const student = await prisma.student.findUnique({
       where: {
         email: email,
+      },
+      include: {
+        _count: {
+          select: {
+            apm: true,
+          },
+        },
+        apm: {
+          orderBy: {
+            id: 'desc',
+          },
+          take: 1,
+          select: {
+            id: true,
+            status: true,
+          },
+        },
       },
     })
 

@@ -13,9 +13,10 @@ model apm {
   requisitionPDF     String
   status             Int     @default(1) //0 - rejeitada, 1 - pendente, 2 - aprovada
   FK_functionary_cpf String? @db.VarChar(12)
+  FK_student_ra      String? @db.VarChar(12)
 
   functionary functionary? @relation(fields: [FK_functionary_cpf], references: [cpf], onDelete: Cascade, map: "FKFunctionaryCpfApm")
-  student     student?
+  student     student?     @relation(fields: [FK_student_ra], references: [ra], onDelete: Cascade, map: "FKStudentRaApm")
 
   @@index([FK_functionary_cpf], map: "FKFunctionaryCpfApm")
 }
@@ -65,11 +66,9 @@ model student {
   locker_number       Int?    @unique
   status              Int     @default(1) @db.TinyInt
   profile_picture_url String? @db.VarChar(255)
-  FK_apm_id           Int?    @unique
 
   locker locker? @relation(fields: [locker_number], references: [number], onDelete: Cascade, map: "FKLockerNumberStudent")
-  apm    apm?    @relation(fields: [FK_apm_id], references: [id], onDelete: Cascade, map: "FKApmIdStudent")
+  apm    apm[]
 
   @@index([locker_number], map: "FKLockerNumberStudent")
-  @@index([FK_apm_id], map: "FKApmIdStudent")
 }
