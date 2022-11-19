@@ -35,7 +35,8 @@ export class SetStudentLockerNumber {
       email: student.email,
       locker_number: lockerNumber,
       profile_picture_url: student.profile_picture_url,
-      apm_id: student.FK_apm_id,
+      apm: student.apm,
+      apmCount: student._count.apm,
     }
 
     const token = sign(studentToken, process.env.TOKEN_SECRET_KEY, {

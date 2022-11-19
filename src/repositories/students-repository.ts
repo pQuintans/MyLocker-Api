@@ -47,6 +47,10 @@ export interface StudentupdateInformationData {
   last_name: string
 }
 
+export interface StudentClearOutLocker {
+  ra: string
+}
+
 export interface StudentsRepositories {
   create: (data: StudentCreateData) => Promise<void>
   findUniqueByRa: (data: StudentFindUniqueByRaData) => Promise<
@@ -81,4 +85,5 @@ export interface StudentsRepositories {
   updateInformation: (data: StudentupdateInformationData) => Promise<void>
   updateStatus: (data: StudentUpdateStatusData) => Promise<void>
   listAll: () => Promise<student[]>
+  clearOutLocker: (data: StudentClearOutLocker) => Promise<void>
 }

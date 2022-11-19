@@ -1,6 +1,7 @@
 import { prisma } from '../../prisma'
 
 import {
+  StudentClearOutLocker,
   StudentCreateData,
   StudentFindUniqueByEmailData,
   StudentFindUniqueByRaData,
@@ -176,5 +177,22 @@ export class PrismaStudentsRepository implements StudentsRepositories {
       },
     })
     return
+  }
+
+  async clearOutLocker({ ra }: StudentClearOutLocker) {
+    await prisma.student.update({
+      where: {
+        ra,
+      },
+      data: {
+        locker: {
+          update: {
+            rentedAt: null,
+            isRented: 0,
+          },
+          disconnect: true,
+        },
+      },
+    })
   }
 }
