@@ -1,5 +1,7 @@
+import { MailAdapter } from '@adapters/mail-adapter'
 import { ApmsRepositories } from '@repositories/apms-repository'
 import { FunctionariesRepositories } from '@repositories/functionaries-repository'
+import { StudentsRepositories } from '@repositories/students-repository'
 
 interface ChangeApmStatusServiceData {
   id: number
@@ -10,7 +12,9 @@ interface ChangeApmStatusServiceData {
 export class ChangeApmStatusService {
   constructor(
     private apmRepositories: ApmsRepositories,
-    private functionariesRepositories: FunctionariesRepositories
+    private functionariesRepositories: FunctionariesRepositories,
+    private studentsRepositories: StudentsRepositories,
+    private mailAdapter: MailAdapter
   ) {}
 
   async execute({ id, status, functionaryCpf }: ChangeApmStatusServiceData) {
@@ -34,6 +38,36 @@ export class ChangeApmStatusService {
 
     if (!functionary) {
       throw new Error('CPF inválido')
+    }
+
+    if (status == 0) {
+      const student = await this.studentsRepositories.findUniqueByRa({
+        ra: apm.FK_student_ra,
+      })
+
+      const studentsFullName = `${student.first_name} ${student.last_name}`
+
+      if (student.locker_number != null) {
+        await this.mailAdapter.sendMail({
+          subjectName: studentsFullName,
+          subject: student.email,
+          body: [
+            '<div style="font-family: sans-serif; font-size: 16px; color: #111">',
+            `<p>Oi ${studentsFullName},`,
+            '<p>Sua apm foi recusada, portanto você perdeu o acesso ao seu armário.</p>',
+            `<p>${
+              student._count.apm < 3
+                ? `Você pode submeter a apm mais ${
+                    3 - student._count.apm
+                  } vezes.`
+                : 'Você estourou o limite de requisições de apm, porém você ainda pode alugar um armário com o preço.'
+            }.</p>`,
+            '<div>',
+          ].join('\n'),
+        })
+
+        await this.studentsRepositories.clearOutLocker({ ra: student.ra })
+      }
     }
 
     await this.apmRepositories.updateApmStatus({ id, status, functionaryCpf })
