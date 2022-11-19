@@ -35,6 +35,7 @@ import { SetFunctionaryVerificationCodeController } from '@controllers/functiona
 import { UpdateFunctionaryPasswordController } from '@controllers/functionary/update-functionary-password-controller'
 import { VerifyFunctionaryVerificationCodeController } from '@controllers/functionary/verify-functionary-verification-code-controller'
 import { ChangeApmStatusController } from '@controllers/apm/change-apm-status-controller'
+import { OpenLockerController } from '@controllers/open-locker-service'
 
 export const router = express.Router()
 
@@ -81,6 +82,8 @@ const changeApmStatusController = new ChangeApmStatusController()
 const handleEmailContactController = new HandleEmailContactController()
 
 const clearStudentLockerController = new ClearStudentLockerController()
+
+const openLockerController = new OpenLockerController()
 
 router.post('/functionaries', createFunctionaryController.handle)
 router.get('/functionaries/:cpf', findFunctionaryController.handle)
@@ -161,3 +164,8 @@ router.post('/sections', createSectionController.handle)
 router.post('/contact', handleEmailContactController.handle)
 
 router.post('/clear-locker-demonstration', clearStudentLockerController.handle)
+
+router.get(
+  '/students/:ra/lockers/:lockerNumberString',
+  openLockerController.handle
+)
