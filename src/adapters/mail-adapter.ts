@@ -2,6 +2,7 @@ export interface SendMailData {
   subjectName: string
   subject: string
   body: string
+  emailSubject: string
 }
 
 export interface SendContactMailData {

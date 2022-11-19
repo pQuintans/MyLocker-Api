@@ -43,6 +43,7 @@ export class SetFunctionaryVerificationCodeService {
     await this.mailAdapter.sendMail({
       subjectName: functionaryFullName,
       subject: functionary.email,
+      emailSubject: 'Código de verificação',
       body: [
         '<div style="font-family: sans-serif; font-size: 16px; color: #111">',
         `<p>Olá ${functionaryFullName},`,

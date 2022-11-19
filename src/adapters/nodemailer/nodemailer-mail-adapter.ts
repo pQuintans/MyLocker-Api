@@ -14,11 +14,11 @@ const transport = nodemailer.createTransport({
 })
 
 export class NodemailerMailAdapter implements MailAdapter {
-  async sendMail({ subjectName, subject, body }: SendMailData) {
+  async sendMail({ subjectName, subject, emailSubject, body }: SendMailData) {
     await transport.sendMail({
       from: 'Equipe MyLocker <mylocker.contato@gmail.com>',
       to: subjectName + '<' + subject + '>',
-      subject: 'Código de verificação',
+      subject: emailSubject,
       html: body,
     })
   }

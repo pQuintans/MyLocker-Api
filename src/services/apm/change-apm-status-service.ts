@@ -51,6 +51,7 @@ export class ChangeApmStatusService {
         await this.mailAdapter.sendMail({
           subjectName: studentsFullName,
           subject: student.email,
+          emailSubject: 'Aviso de devolução de armário',
           body: [
             '<div style="font-family: sans-serif; font-size: 16px; color: #111">',
             `<p>Oi ${studentsFullName},`,
@@ -60,7 +61,7 @@ export class ChangeApmStatusService {
                 ? `Você ainda pode submeter a apm mais ${
                     3 - student._count.apm
                   } vezes. Se for de seu interesse, você pode alugar um armário sem o desconto.`
-                : 'Você estourou o limite de requisições de apm, porém você ainda pode alugar um armário com o preço'
+                : 'Você estourou o limite de requisições de apm, porém você ainda pode alugar um armário com o preço regular'
             }.</p>`,
             '<div>',
           ].join('\n'),
