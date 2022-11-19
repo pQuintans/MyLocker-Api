@@ -39,9 +39,7 @@ export class UpdateFunctionaryPasswordService {
     const passwordHasLettersAndNumbers = regex.test(password)
 
     if (!passwordHasLettersAndNumbers) {
-      throw new Error(
-        'Sua senha deve conter numeros, letras minusculas e letras maiusculas'
-      )
+      throw new Error('A senha deve conter números, minúsculas e maiúsculas')
     }
 
     const hashPassword = await hash(password, 8)
