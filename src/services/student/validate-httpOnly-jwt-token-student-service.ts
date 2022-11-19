@@ -15,16 +15,7 @@ export class ValidateHttpOnlyJwtTokenStudentService {
       const student = verify(token, process.env.TOKEN_SECRET_KEY)
 
       if (typeof student === 'object') {
-        const {
-          ra,
-          first_name,
-          last_name,
-          email,
-          locker_number,
-          profile_picture_url,
-          apm,
-          apmCount,
-        } = student
+        const { email } = student
 
         const studentRequisition =
           await this.studentsRepository.findUniqueByEmail({
@@ -36,14 +27,14 @@ export class ValidateHttpOnlyJwtTokenStudentService {
         }
 
         return {
-          ra,
-          first_name,
-          last_name,
-          email,
-          locker_number,
-          profile_picture_url,
-          apm,
-          apmCount,
+          ra: studentRequisition.ra,
+          first_name: studentRequisition.first_name,
+          last_name: studentRequisition.last_name,
+          email: studentRequisition.email,
+          locker_number: studentRequisition.locker_number,
+          profile_picture_url: studentRequisition.profile_picture_url,
+          apm: studentRequisition.apm,
+          apmCount: studentRequisition._count.apm,
         }
       }
     } else {
