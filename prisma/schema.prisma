@@ -22,7 +22,7 @@ model apm {
 }
 
 model functionary {
-  cpf                 String  @id @db.VarChar(10)
+  cpf                 String  @id @db.VarChar(15)
   first_name          String  @db.VarChar(20)
   last_name           String  @db.VarChar(20)
   email               String  @unique @db.VarChar(50)
