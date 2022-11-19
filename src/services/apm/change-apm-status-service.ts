@@ -57,10 +57,10 @@ export class ChangeApmStatusService {
             '<p>Sua apm foi recusada, portanto você perdeu o acesso ao seu armário.</p>',
             `<p>${
               student._count.apm < 3
-                ? `Você pode submeter a apm mais ${
+                ? `Você ainda pode submeter a apm mais ${
                     3 - student._count.apm
-                  } vezes.`
-                : 'Você estourou o limite de requisições de apm, porém você ainda pode alugar um armário com o preço.'
+                  } vezes. Se for de seu interesse, você pode alugar um armário sem o desconto.`
+                : 'Você estourou o limite de requisições de apm, porém você ainda pode alugar um armário com o preço'
             }.</p>`,
             '<div>',
           ].join('\n'),
